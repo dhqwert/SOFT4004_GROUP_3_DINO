@@ -1,0 +1,536 @@
+fileFormatVersion: 2
+guid: 032a31f9ece62e34c939337c00c1fa43
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_0"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 569
+        width: 1200
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55c265f3cb6f99f4c9e6a4f3dab383bb
+      internalID: 498855100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_1"
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 715
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 239e5c792e6c148408b3fde658459029
+      internalID: 392640685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_2"
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 708
+        width: 344
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb8231635ccc49844969ca4d3ca0eaee
+      internalID: 282648942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_3"
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 708
+        width: 342
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3760a17f807ebe74c8a182f5e31d469c
+      internalID: 661376237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_4"
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 711
+        width: 344
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28eefe0c07319cc4c8cb3c40c5700bb1
+      internalID: 1516166090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_5"
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 715
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a9ac2c8a67ead24f80ba3e28452a896
+      internalID: -1033329848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_6"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 709
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18942e74e444ecc49977f33404b05770
+      internalID: 939149606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_7"
+      rect:
+        serializedVersion: 2
+        x: 1195
+        y: 709
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afa8a6deb6282fe4db33fa196f9bb241
+      internalID: 1461860142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_8"
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 693
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60e9232f74054a64a8fd78a85f47d890
+      internalID: -531332346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_9"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 648
+        width: 43
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d71d73ced0390074c9b8eb1aef534cc6
+      internalID: 677334918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_10"
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 648
+        width: 43
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df14823e2ce3388418b66a0b552d9c4c
+      internalID: -1371230701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_11"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 114
+        width: 1200
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb71793a907a01d4da50494ab20a9c1c
+      internalID: 728303453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_12"
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 187
+        width: 344
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb220a518a6d7a54dabaea5286719482
+      internalID: -119718622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_13"
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 186
+        width: 342
+        height: 343
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc5354e8e309b8f4a8d264faae7e12d0
+      internalID: 220653981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_14"
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 186
+        width: 341
+        height: 343
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adbb308727ce39d4e846fd67e78cfd2e
+      internalID: -453601304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_15"
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 183
+        width: 61
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c194c5cd0e7d5fe468d17c72dcf339d1
+      internalID: -2131366881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_16"
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 151
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2cb8b75c95daec4b8738ce318ca4250
+      internalID: 324183827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_17"
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 126
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64ec4282944afa84ab1db7e9b58ecd90
+      internalID: -1637137802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_0": 498855100
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_1": 392640685
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_10": -1371230701
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_11": 728303453
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_12": -119718622
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_13": 220653981
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_14": -453601304
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_15": -2131366881
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_16": 324183827
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_17": -1637137802
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_2": 282648942
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_3": 661376237
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_4": 1516166090
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_5": -1033329848
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_6": 939149606
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_7": 1461860142
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_8": -531332346
+      "\u2014Pngtree\u2014colorful round web buttons isolated_7136871_9": 677334918
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

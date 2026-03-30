@@ -1,0 +1,712 @@
+fileFormatVersion: 2
+guid: f92b589188458e848a49542f97898b0e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_0
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1866
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78e7374797161c64988282548918f5b6
+      internalID: 537673871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_1
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 924
+        width: 718
+        height: 1014
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a355ce2dfb168641809b28b9abf5583
+      internalID: -1628191887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_2
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 1716
+        width: 621
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5662fc445908aaa43ab08d0a411f1173
+      internalID: 982417103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_3
+      rect:
+        serializedVersion: 2
+        x: 1878
+        y: 1764
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb9781d8b09889d4d98c012346286e57
+      internalID: 1198010689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_4
+      rect:
+        serializedVersion: 2
+        x: 1866
+        y: 1752
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 542258f7388630548b8949277dc06c6a
+      internalID: 119986797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_5
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 1698
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f4b07a8cda4eb040995b947c36edfee
+      internalID: -1412371867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_6
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 1710
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e01bbc34b4602d744ad012df473a9a0d
+      internalID: 1384101421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_7
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 1674
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 856cfda14454a2a468014bb6d67d29e7
+      internalID: -1148560017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_8
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1644
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2111ff6760f7d104191bfc28b21ed4b9
+      internalID: -1741410526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_9
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 1470
+        width: 621
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1240ad3028ee14a4bb1821c12ef16366
+      internalID: -1459154918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_10
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 1530
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1f338081b40cd444a6603094043fb98
+      internalID: -391129347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_11
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1500
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f69290a3b59aa1f499760e8fb163d91e
+      internalID: -636494058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_12
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 1500
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94998383bd099464abd48103ac504684
+      internalID: 557379958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_13
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 1476
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70479463f412b7a4da18c0de3ff571f3
+      internalID: 2135968614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_14
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 1285
+        width: 621
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a81860bdb5599ca41a2c79b8de2647b8
+      internalID: -2078760263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_15
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 1242
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33c4d0b43c383934ba93debdabbb31bf
+      internalID: 1146469017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_16
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 1074
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02728e406b3508541acbd3541fab13cd
+      internalID: -43317310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_17
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 1068
+        width: 621
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bdec249130e8ce4888b48d87af0de48
+      internalID: 1132033950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_18
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 1044
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4d0e74d146012840b2c68b15c651daf
+      internalID: 664558192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_19
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 1056
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 311d203e4c16fa24383f0d1fbb355a10
+      internalID: -2110330433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_20
+      rect:
+        serializedVersion: 2
+        x: 1866
+        y: 894
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e31216ef934d3b44fbf479c3fad4d305
+      internalID: 2069983507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_21
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 702
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77e17558808d2324caed438f5f311aa5
+      internalID: 715768186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_22
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 42
+        width: 717
+        height: 848
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 187f82ca5bf14fe40b570e92cfb9777f
+      internalID: -342910924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_23
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 702
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ec05d2f782067c4cab742b4480c377c
+      internalID: 251390154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_24
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 702
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f13c8ac2aac5224090d3bed576b086a
+      internalID: -30001465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_25
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 42
+        width: 717
+        height: 848
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f567211e2245e9140bf096c2ef62fff4
+      internalID: -2004767913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: c57b0c7f4a006034a87d50babf2a001c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_0: 537673871
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_1: -1628191887
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_10: -391129347
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_11: -636494058
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_12: 557379958
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_13: 2135968614
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_14: -2078760263
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_15: 1146469017
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_16: -43317310
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_17: 1132033950
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_18: 664558192
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_19: -2110330433
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_2: 982417103
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_20: 2069983507
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_21: 715768186
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_22: -342910924
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_23: 251390154
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_24: -30001465
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_25: -2004767913
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_3: 1198010689
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_4: 119986797
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_5: -1412371867
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_6: 1384101421
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_7: -1148560017
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_8: -1741410526
+      dark-colors-design-complete-set-level-button-game-pop-up-icon-window-elements_9: -1459154918
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
