@@ -742,11 +742,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rings:
+  - {fileID: 4122130427758036102, guid: a3dc5ec9a0ce46243a535967b9f6c305, type: 3}
   - {fileID: 8794269105867479992, guid: 514d5e247c6fb8641bc28855a501d473, type: 3}
-  - {fileID: 4122130427758036102, guid: a3dc5ec9a0ce46243a535967b9f6c305, type: 3}
   - {fileID: 8581271271120913078, guid: 0e3de7d754a5ca84d88db1b9de61604a, type: 3}
-  - {fileID: 4122130427758036102, guid: a3dc5ec9a0ce46243a535967b9f6c305, type: 3}
   - {fileID: 719853567751286709, guid: 9005977092d89d545a874b0f2b4740f4, type: 3}
+  - {fileID: 4122130427758036102, guid: a3dc5ec9a0ce46243a535967b9f6c305, type: 3}
   - {fileID: 7626741035077544274, guid: 3bf02905b944be04ab86d65c8de249eb, type: 3}
   noOfRings: 10
   ringDistance: 5

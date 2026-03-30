@@ -13,34 +13,37 @@ public class LevelManager : MonoBehaviour
         // Khởi tạo Singleton để gọi từ các script khác dễ dàng
         if (instance == null) instance = this;
 
-        // Lấy dữ liệu level đã lưu trong máy. Nếu người chơi mới tải game, mặc định là Level 1.
-        currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+        // Level hiện tại là đúng Scene đang chạy (chứ không phải mốc tiến độ lớn nhất trong máy)
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
     // Hàm này sẽ được gọi khi quả bóng chạm đích (Win game)
     public void PassLevelAndLoadNext()
     {
-        // 1. Tăng Level lên 1 và LƯU VÀO MÁY
-        currentLevel++;
-        PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+        // 1. Xác định Level tiếp theo dựa trên Scene HIỆN TẠI (để tránh lỗi biến cũ nhớ nhầm)
+        int activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextLevel = activeSceneIndex + 1;
+
+        // Cập nhật tiến độ: Lưu mốc Level cao nhất mà người chơi đã mở khóa (chỉ lưu nếu lớn hơn mốc đang có)
+        int maxUnlocked = PlayerPrefs.GetInt("CurrentLevel", 1);
+        if (nextLevel > maxUnlocked)
+        {
+            PlayerPrefs.SetInt("CurrentLevel", nextLevel);
+        }
 
         // 2. Logic tính toán Scene cần Load
-        // Lấy tổng số lượng Scene bạn đã ném vào Build Settings
         int totalScenes = SceneManager.sceneCountInBuildSettings;
 
-        // Giả sử: Scene 0 là Home Menu. 
-        // Các Scene chơi thật bắt đầu từ 1.
+        Debug.Log("TỪ MÀN: " + activeSceneIndex + " -> CHUYỂN SANG MÀN: " + nextLevel + " | TỔNG SỐ MÀN: " + totalScenes);
         
-        if (currentLevel < totalScenes) 
+        if (nextLevel < totalScenes) 
         {
             // Nếu Level hiện tại VẪN NHỎ HƠN tổng số Scene bạn có -> Load Scene tiếp theo bình thường
-            SceneManager.LoadScene(currentLevel);
+            SceneManager.LoadScene(nextLevel);
         }
         else 
         {
-            // TÍNH NĂNG VÔ HẠN: Nếu người chơi đạt level 10 nhưng bạn chỉ có 3 Scene.
-            // Game sẽ tự động Random load lại một màn chơi bất kỳ từ màn 1 đến màn cuối.
-            // Nhưng UI trên màn hình vẫn sẽ hiển thị là Level 10.
+            // TÍNH NĂNG VÔ HẠN: Random load lại một màn chơi bất kỳ
             int randomScene = Random.Range(1, totalScenes); 
             SceneManager.LoadScene(randomScene);
         }

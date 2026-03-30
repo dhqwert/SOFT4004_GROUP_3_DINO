@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
         if(levelWin) {
             levelWinPannal.SetActive (true); 
-            
+
             if(Input.GetMouseButtonDown (0)) {
                 LevelManager.instance.PassLevelAndLoadNext();
             }

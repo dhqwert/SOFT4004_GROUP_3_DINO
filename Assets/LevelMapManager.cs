@@ -59,9 +59,8 @@ public class LevelMapManager : MonoBehaviour
             // --- LỆNH CHUYỂN MÀN KHI BẤM NÚT ---
             int levelToLoad = i; // Bắt buộc phải có biến tạm này để ghi nhớ đúng số thứ tự
             nodeButton.onClick.AddListener(() => {
-                // Lưu lại level người chơi vừa chọn để vào game hiển thị cho đúng
-                PlayerPrefs.SetInt("CurrentLevel", levelToLoad); 
-                // Load Scene tương ứng (Đảm bảo đã cho hết các level vào Build Settings)
+                // Đã xóa lệnh SetInt("CurrentLevel") ở đây để không làm mất tiến độ lớn nhất của người chơi
+                // Chỉ Load Scene tương ứng thôi (vì LevelManager giờ dựa vào Scene Index thật)
                 SceneManager.LoadScene(levelToLoad); 
             });
         }
