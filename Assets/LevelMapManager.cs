@@ -7,12 +7,18 @@ public class LevelMapManager : MonoBehaviour
     [Header("Kéo thả từ bên ngoài vào:")]
     public GameObject nodePrefab; // Kéo file Prefab màu xanh ở Project vào đây
     public Transform container;   // Kéo cái LevelMapContainer vào đây
-    
+    public TextMeshProUGUI coinText;
     [Header("Cài đặt Level:")]
     public int totalLevels = 5;   // Tổng số Level game bạn đang có
 
     void Start()
     {
+        // Hiển thị số Tiền vàng hiện có (nếu bạn đã kéo thả UI xu vào coinText)
+        if (coinText != null) 
+        {
+            coinText.text = PlayerPrefs.GetInt("TotalCoins", 0).ToString();
+        }
+
         // 1. Lấy level hiện tại mà người chơi đã đạt đến (Mặc định là 1)
         int unlockedLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
 
@@ -56,6 +62,23 @@ public class LevelMapManager : MonoBehaviour
                 nodeButton.interactable = true; 
             }
 
+            // --- CẬP NHẬT ĐƯỜNG NỐI (LINE TỪ NODE HIỆN TẠI XUỐNG NODE TRƯỚC ĐÓ) ---
+            Transform lineObj = newNode.transform.Find("Line");
+            if (lineObj != null) {
+                Image lineImage = lineObj.GetComponent<Image>();
+                // Tô màu đường nối
+                if (i <= unlockedLevel) {
+                    lineImage.color = Color.cyan; // Bạn có thể đổi Color.cyan thành màu xanh giống vòng tròn (vd: Color.green)
+                } else {
+                    lineImage.color = Color.gray; // Chưa tới thì để dòng kẻ xám
+                }
+                
+                // Ẩn dòng kẻ của trạm đầu tiên (Lv 1) vì ở dưới Lv 1 không còn Level nào nữa
+                if (i == 1) {
+                    lineObj.gameObject.SetActive(false);
+                }
+            }
+
             // --- LỆNH CHUYỂN MÀN KHI BẤM NÚT ---
             int levelToLoad = i; // Bắt buộc phải có biến tạm này để ghi nhớ đúng số thứ tự
             nodeButton.onClick.AddListener(() => {
@@ -64,5 +87,16 @@ public class LevelMapManager : MonoBehaviour
                 SceneManager.LoadScene(levelToLoad); 
             });
         }
+    }
+
+    // Gắn hàm này vào sự kiện OnClick của một Nút bấm UI để xoá dữ liệu chơi lại từ đầu
+    public void ResetGameProgress()
+    {
+        // Xoá bỏ mốc lưu bàn chơi hiện tại
+        PlayerPrefs.DeleteKey("CurrentLevel");
+        // Hoặc bạn có thể dùng PlayerPrefs.DeleteAll(); nếu muốn xoá trắng tải khoản (Cấp, tiền, setting...)
+        
+        // Tải lại Scene Map hiện tại để tự động cập nhật lại các nút bị khóa và màu sắc
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -16,6 +16,12 @@ public class Ring : MonoBehaviour
 
     private void Update () {
         if(transform.position.y > player.position.y + 0.1f) {
+            
+            // --- CỘNG ĐIỂM VÀ VÀNG ---
+            // Gọi GameManager và cộng 10 điểm (bên trong hàm AddScore nó đã tự động +1 vàng)
+            if (GameManager.instance != null) {
+                GameManager.instance.AddScore(10);
+            }
 
             // 1. Duyệt qua các mảnh vỡ: Tách ra khỏi cha và bật vật lý (có kiểm tra an toàn)
             for(int i = 0; i < childRings.Length; i++) {
