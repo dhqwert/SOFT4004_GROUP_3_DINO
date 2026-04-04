@@ -60,21 +60,61 @@ public class GameManager : MonoBehaviour
         if (coinText != null) coinText.text = "Coins: " + currentCoins; 
     }
 
+    // ====== CHỨC NĂNG HỒI SINH ======
+    // (Bấm nút này sẽ mở xem Video, xem xong thực thi hàm Hồi Sinh)
+    public void RevivePlayer()
+    {
+        if (AdManager.instance != null)
+        {
+            AdManager.instance.ShowRewardedAd(() => {
+                // LOGIC HỒI SINH SAU KHI XEM XONG VIDEO
+                gameOver = false;
+                gameOverPannal.SetActive(false);
+                Time.timeScale = 1;
+
+                // Ghi chú: Nếu quả bóng đang kẹt vào cái gai màu đỏ, bạn phải nhấc nó lên một chút bằng script Ball
+                // Ví dụ (Tuỳ code chướng ngại vật của bạn): 
+                // GameObject.FindObjectOfType<Player>().transform.position += Vector3.up * 2f; 
+            });
+        }
+    }
+
+    // Nút Bỏ qua hồi sinh, chơi lại từ đầu
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     private void Update () {
         if(gameOver) {
             Time.timeScale = 0; 
             gameOverPannal.SetActive (true); 
             
-            if(Input.GetMouseButtonDown(0)) {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
+            // Xóa cái đoạn Bấm chuột nạp lại bàn chơi mặc định (nhường đường cho nút Restart và Revive UI)
+            // if(Input.GetMouseButtonDown(0)) {
+            //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            // }
         }
 
         if(levelWin) {
             levelWinPannal.SetActive (true); 
 
+            // Cập nhật: Khi nhấp màn hình sang màn mới, kiểm tra chiếu QC trước
             if(Input.GetMouseButtonDown (0)) {
-                LevelManager.instance.PassLevelAndLoadNext();
+                
+                if (AdManager.instance != null) {
+                    // Nhờ AdManager xét duyệt xuất hiện quảng cáo
+                    AdManager.instance.ShowInterstitialAdIfReady(SceneManager.GetActiveScene().buildIndex, () => {
+                        // Action sau khi đóng quảng cáo (Hoặc không được hiện qc)
+                        LevelManager.instance.PassLevelAndLoadNext();
+                    });
+                } else {
+                    // Đề phòng trường hợp lỗi chưa thả AdManager vào Scene
+                    LevelManager.instance.PassLevelAndLoadNext();
+                }
+
+                // Chặn không cho gọi hàm nhiều lần
+                levelWin = false; 
             }
         }
     }
