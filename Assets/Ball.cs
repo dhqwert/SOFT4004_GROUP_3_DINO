@@ -23,12 +23,15 @@ public class Ball : MonoBehaviour
         string materialName = other.transform.GetComponent<MeshRenderer> ().material.name;
         if(materialName == "Safe (Instance)") {
             Debug.Log ("Safe");
+            if (AudioManager.instance != null) AudioManager.instance.Play("Bounce");
         }
         if(materialName == "Unsafe (Instance)") {
             GameManager.gameOver = true;
+            if (AudioManager.instance != null) AudioManager.instance.Play("GameOver");
         }
         if(materialName == "LastRing (Instance)") {
             GameManager.instance.WinLevel();
+            if (AudioManager.instance != null) AudioManager.instance.Play("GameWin");
         }
     }
 }

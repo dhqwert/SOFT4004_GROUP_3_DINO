@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 [System.Serializable]
 public class RankTier
@@ -27,9 +29,17 @@ public class LeagueManager : MonoBehaviour
     // Mỗi lần mở Panel lên là tự động tính toán lại
     void OnEnable()
     {
-        // Bí quyết thủ thuật: Trì hoãn 1 chút xíu (0.05s) để cho các thanh UI tự xếp hàng cho ngay ngắn 
-        // xong mũi tên mới bắt đầu lấy tọa độ bay vào. Nhờ vậy nó không bị lệch chệch nhịp!
-        Invoke("RefreshLeague", 0.05f);
+        // Dùng Coroutine chờ Layout tính xong vị trí mới di chuyển mũi tên
+        StartCoroutine(RefreshAfterLayout());
+    }
+
+    // Chờ 2 frame + ép Canvas cập nhật => đảm bảo Layout Group đã xếp xong trên MỌI thiết bị
+    IEnumerator RefreshAfterLayout()
+    {
+        yield return null; // Chờ hết frame 1
+        yield return null; // Chờ hết frame 2 (Layout Group chắc chắn đã tính xong)
+        Canvas.ForceUpdateCanvases(); // Ép toàn bộ Canvas vẽ lại cho chắc ăn
+        RefreshLeague();
     }
 
     public void RefreshLeague()
@@ -58,12 +68,14 @@ public class LeagueManager : MonoBehaviour
         // 3. Phóng mũi tên bay ngang vào biển tên đó
         if (arrowIndicator != null && rankTiers.Length > 0 && rankTiers[currentRankIndex].rankUIPosition != null)
         {
-            // Lấy trục hoành của mũi tên cũ, nhưng thay đổi trục tung (Y) bằng với bảng danh vọng
+            // Lấy vị trí thế giới của thanh rank mục tiêu
             Vector3 targetPos = arrowIndicator.position;
             targetPos.y = rankTiers[currentRankIndex].rankUIPosition.position.y;
             arrowIndicator.position = targetPos;
             
-            Debug.Log("Chúc mừng! Chức danh hiện tại: " + rankTiers[currentRankIndex].rankName);
+            Debug.Log("Chúc mừng! Chức danh hiện tại: " + rankTiers[currentRankIndex].rankName 
+                     + " | Arrow Y = " + arrowIndicator.position.y 
+                     + " | Target Y = " + rankTiers[currentRankIndex].rankUIPosition.position.y);
         }
     }
 
@@ -73,7 +85,7 @@ public class LeagueManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("TotalLeagueScore", 0);
         PlayerPrefs.Save();
-        RefreshLeague();
+        StartCoroutine(RefreshAfterLayout());
         Debug.Log("Đã cạo đầu đi tu, rớt hết điểm Rank!");
     }
 }

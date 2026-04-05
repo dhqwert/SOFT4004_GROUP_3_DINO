@@ -22,6 +22,8 @@ public class Ring : MonoBehaviour
             if (GameManager.instance != null) {
                 GameManager.instance.AddScore(10);
             }
+            // Phát âm thanh Whoosh khi xuyên qua tầng
+            if (AudioManager.instance != null) AudioManager.instance.Play("Whoosh");
 
             // 1. Duyệt qua các mảnh vỡ: Tách ra khỏi cha và bật vật lý (có kiểm tra an toàn)
             for(int i = 0; i < childRings.Length; i++) {
