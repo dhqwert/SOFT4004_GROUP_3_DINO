@@ -60,6 +60,21 @@ public class GameManager : MonoBehaviour
         if (coinText != null) coinText.text = "Coins: " + currentCoins; 
     }
 
+    // ====== CHỨC NĂNG LƯU ĐIỂM XẾP HẠNG ======
+    public void WinLevel()
+    {
+        if (levelWin) return; // Chống spam kẹt cứng khi đập vào vạch nhiều lần
+        levelWin = true;
+
+        // Cộng điểm ván này vào Kho điểm Xếp Hạng Trọn Đời
+        int tempTotalScore = PlayerPrefs.GetInt("TotalLeagueScore", 0);
+        tempTotalScore += currentScore;
+        PlayerPrefs.SetInt("TotalLeagueScore", tempTotalScore);
+        PlayerPrefs.Save();
+        
+        Debug.Log("Tích luỹ thành công! Tổng điểm Xếp Hạng hiện tại: " + tempTotalScore);
+    }
+
     // ====== CHỨC NĂNG HỒI SINH ======
     // (Bấm nút này sẽ mở xem Video, xem xong thực thi hàm Hồi Sinh)
     public void RevivePlayer()

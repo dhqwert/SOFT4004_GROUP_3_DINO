@@ -28,7 +28,7 @@ public class Ball : MonoBehaviour
             GameManager.gameOver = true;
         }
         if(materialName == "LastRing (Instance)") {
-            GameManager.levelWin = true;
+            GameManager.instance.WinLevel();
         }
     }
 }

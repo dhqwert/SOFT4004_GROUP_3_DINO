@@ -57,9 +57,8 @@ public class LevelMapManager : MonoBehaviour
                 nodeImage.color = Color.gray;
                 if (glowEffect != null) glowEffect.gameObject.SetActive(false);
                 
-                // Ý của bạn là "Có thể chơi level nào cũng được", nên mình vẫn để interactable = true.
-                // Nếu muốn khóa không cho chơi "ăn gian" vượt cấp thì đổi chữ true ở dưới thành false nhé!
-                nodeButton.interactable = true; 
+                // Khóa lại không cho người chơi bấm lén vượt cấp
+                nodeButton.interactable = false; 
             }
 
             // --- CẬP NHẬT ĐƯỜNG NỐI (LINE TỪ NODE HIỆN TẠI XUỐNG NODE TRƯỚC ĐÓ) ---
@@ -98,5 +97,28 @@ public class LevelMapManager : MonoBehaviour
         
         // Tải lại Scene Map hiện tại để tự động cập nhật lại các nút bị khóa và màu sắc
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    // Gắn hàm này vào cái NÚT PLAY to bự ngoài màn hình để bấm là vô luôn ván mới nhất
+    public void PlayCurrentLevel()
+    {
+        int unlockedLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+        SceneManager.LoadScene(unlockedLevel);
+    }
+
+    // [DÀNH CHO DEV] Thêm một Nút Bí Mật ngay trên thanh Inspector của Unity để bạn vọc vạch
+    [ContextMenu("MỞ KHÓA TOÀN BỘ MAP (Click vào đây)")]
+    public void UnlockAllLevels()
+    {
+        // Phá đảo luôn: Ép mốc lưu trữ thành Max level
+        PlayerPrefs.SetInt("CurrentLevel", totalLevels);
+        PlayerPrefs.Save();
+        Debug.Log("DEV HACK THÀNH CÔNG: Đã cạy khoá toàn bộ " + totalLevels + " Level!");
+
+        // Nếu game đang chạy (Play Mode) thì giựt sập load lại cảnh để áp dụng ngay lập tức
+        if (Application.isPlaying)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

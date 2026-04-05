@@ -2247,6 +2247,7 @@ GameObject:
   - component: {fileID: 1152801847}
   - component: {fileID: 1152801851}
   - component: {fileID: 1152801852}
+  - component: {fileID: 1152801853}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Player
@@ -2381,6 +2382,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceForce: 400
   splitPrefab: {fileID: 6168038806166532295, guid: 224205b48baa8c84a8a766b1eee10cda, type: 3}
+--- !u!114 &1152801853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152801846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8e7d485819ad0b4aa38960af28da109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1315359709
 GameObject:
   m_ObjectHideFlags: 0
