@@ -1,0 +1,61 @@
+﻿  dev
+* main
+On branch main
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	deleted:    Assets/AdManager.cs
+	deleted:    Assets/AdManager.cs.meta
+	deleted:    Assets/AudioManager.cs
+	deleted:    Assets/AudioManager.cs.meta
+	deleted:    Assets/BackHome.cs
+	deleted:    Assets/BackHome.cs.meta
+	deleted:    Assets/Ball.cs
+	deleted:    Assets/Ball.cs.meta
+	deleted:    Assets/BallSkin.cs
+	deleted:    Assets/BallSkin.cs.meta
+	deleted:    Assets/CameraFollow.cs
+	deleted:    Assets/CameraFollow.cs.meta
+	deleted:    Assets/DebugLog.cs
+	deleted:    Assets/DebugLog.cs.meta
+	deleted:    Assets/GameManager.cs
+	deleted:    Assets/GameManager.cs.meta
+	deleted:    Assets/HelixManager.cs
+	deleted:    Assets/HelixManager.cs.meta
+	deleted:    Assets/HelixRotation.cs
+	deleted:    Assets/HelixRotation.cs.meta
+	deleted:    Assets/LeagueManager.cs
+	deleted:    Assets/LeagueManager.cs.meta
+	deleted:    Assets/LevelManager.cs
+	deleted:    Assets/LevelManager.cs.meta
+	deleted:    Assets/LevelMapManager.cs
+	deleted:    Assets/LevelMapManager.cs.meta
+	deleted:    Assets/LevelProgressUI.cs
+	deleted:    Assets/LevelProgressUI.cs.meta
+	deleted:    Assets/PlayGame.cs
+	deleted:    Assets/PlayGame.cs.meta
+	deleted:    Assets/Ring.cs
+	deleted:    Assets/Ring.cs.meta
+	deleted:    Assets/SettingManager.cs
+	deleted:    Assets/SettingManager.cs.meta
+	deleted:    Assets/SkinManager.cs
+	deleted:    Assets/SkinManager.cs.meta
+	deleted:    Assets/SkinNode.cs
+	deleted:    Assets/SkinNode.cs.meta
+	deleted:    Assets/SoundManager.cs
+	deleted:    Assets/SoundManager.cs.meta
+	deleted:    Assets/UIManager.cs
+	deleted:    Assets/UIManager.cs.meta
+	modified:   ProjectSettings/GvhProjectSettings.xml
+	modified:   ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Assets/Script.meta
+	Assets/Script/
+	git_info.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
