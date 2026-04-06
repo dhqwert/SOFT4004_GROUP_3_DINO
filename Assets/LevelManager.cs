@@ -24,15 +24,17 @@ public class LevelManager : MonoBehaviour
         int activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextLevel = activeSceneIndex + 1;
 
-        // Cập nhật tiến độ: Lưu mốc Level cao nhất mà người chơi đã mở khóa (chỉ lưu nếu lớn hơn mốc đang có)
-        int maxUnlocked = PlayerPrefs.GetInt("CurrentLevel", 1);
-        if (nextLevel > maxUnlocked)
-        {
-            PlayerPrefs.SetInt("CurrentLevel", nextLevel);
-        }
-
         // 2. Logic tính toán Scene cần Load
         int totalScenes = SceneManager.sceneCountInBuildSettings;
+        int maxPlayableLevel = Mathf.Max(1, totalScenes - 1);
+        int safeUnlockedLevel = Mathf.Clamp(nextLevel, 1, maxPlayableLevel);
+
+        // Cập nhật tiến độ: Lưu mốc Level cao nhất mà người chơi đã mở khóa (chỉ lưu nếu lớn hơn mốc đang có)
+        int maxUnlocked = PlayerPrefs.GetInt("CurrentLevel", 1);
+        if (safeUnlockedLevel > maxUnlocked)
+        {
+            PlayerPrefs.SetInt("CurrentLevel", safeUnlockedLevel);
+        }
 
         Debug.Log("TỪ MÀN: " + activeSceneIndex + " -> CHUYỂN SANG MÀN: " + nextLevel + " | TỔNG SỐ MÀN: " + totalScenes);
         

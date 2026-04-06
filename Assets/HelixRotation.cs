@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class HelixRotator : MonoBehaviour
 {
-    public float rotationSpeed = 300f;
-    public float rotationSpeedAndroid = 50f;
+    public float rotationSpeed = 8f;
+    public float rotationSpeedAndroid = 0.25f;
 
     private void Update () {
+        if (GameManager.gameOver || GameManager.levelWin || Time.timeScale == 0f) {
+            return;
+        }
         
-        #if UNITY_EDITOR
-            // this input is for pc its not working in mobile
+        #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBGL
             if(Input.GetMouseButton (0)) {
                 float mouseX = Input.GetAxisRaw ("Mouse X");
-                // Đã sửa trục X và Z thành 0f
-                transform.Rotate (0f, -mouseX * rotationSpeed * Time.deltaTime, 0f);
+                transform.Rotate (0f, -mouseX * rotationSpeed, 0f);
             }
 
         #elif UNITY_ANDROID
-            // for mobile
             if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) {
                 float xDeltaPos = Input.GetTouch (0).deltaPosition.x;
-                // Đã sửa trục X và Z thành 0f
-                transform.Rotate (0f, -xDeltaPos * rotationSpeedAndroid * Time.deltaTime, 0f);
+                transform.Rotate (0f, -xDeltaPos * rotationSpeedAndroid, 0f);
             }
         #endif
     }

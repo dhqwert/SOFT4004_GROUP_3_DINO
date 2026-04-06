@@ -13,6 +13,10 @@ public class LevelMapManager : MonoBehaviour
 
     void Start()
     {
+        int totalScenes = SceneManager.sceneCountInBuildSettings;
+        int maxPlayableLevel = Mathf.Max(1, totalScenes - 1);
+        int displayLevels = Mathf.Min(totalLevels, maxPlayableLevel);
+
         // Hiển thị số Tiền vàng hiện có (nếu bạn đã kéo thả UI xu vào coinText)
         if (coinText != null) 
         {
@@ -20,10 +24,10 @@ public class LevelMapManager : MonoBehaviour
         }
 
         // 1. Lấy level hiện tại mà người chơi đã đạt đến (Mặc định là 1)
-        int unlockedLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+        int unlockedLevel = Mathf.Clamp(PlayerPrefs.GetInt("CurrentLevel", 1), 1, maxPlayableLevel);
 
         // 2. Vòng lặp tự động đúc ra các vòng tròn (Sinh từ Level to nhất lùi về Level 1 để level to nằm trên cùng)
-        for (int i = totalLevels; i >= 1; i--)
+        for (int i = displayLevels; i >= 1; i--)
         {
             // Sinh ra 1 vòng tròn mới và nhét nó vào trong Container
             GameObject newNode = Instantiate(nodePrefab, container);
@@ -83,7 +87,8 @@ public class LevelMapManager : MonoBehaviour
             nodeButton.onClick.AddListener(() => {
                 // Đã xóa lệnh SetInt("CurrentLevel") ở đây để không làm mất tiến độ lớn nhất của người chơi
                 // Chỉ Load Scene tương ứng thôi (vì LevelManager giờ dựa vào Scene Index thật)
-                SceneManager.LoadScene(levelToLoad); 
+                int safeLevelToLoad = Mathf.Clamp(levelToLoad, 1, maxPlayableLevel);
+                SceneManager.LoadScene(safeLevelToLoad); 
             });
         }
     }
@@ -102,7 +107,10 @@ public class LevelMapManager : MonoBehaviour
     // Gắn hàm này vào cái NÚT PLAY to bự ngoài màn hình để bấm là vô luôn ván mới nhất
     public void PlayCurrentLevel()
     {
-        int unlockedLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+        int totalScenes = SceneManager.sceneCountInBuildSettings;
+        int maxPlayableLevel = Mathf.Max(1, totalScenes - 1);
+        int unlockedLevel = Mathf.Clamp(PlayerPrefs.GetInt("CurrentLevel", 1), 1, maxPlayableLevel);
+        PlayerPrefs.SetInt("CurrentLevel", unlockedLevel);
         SceneManager.LoadScene(unlockedLevel);
     }
 
@@ -110,10 +118,14 @@ public class LevelMapManager : MonoBehaviour
     [ContextMenu("MỞ KHÓA TOÀN BỘ MAP (Click vào đây)")]
     public void UnlockAllLevels()
     {
+        int totalScenes = SceneManager.sceneCountInBuildSettings;
+        int maxPlayableLevel = Mathf.Max(1, totalScenes - 1);
+        int unlockLevel = Mathf.Min(totalLevels, maxPlayableLevel);
+
         // Phá đảo luôn: Ép mốc lưu trữ thành Max level
-        PlayerPrefs.SetInt("CurrentLevel", totalLevels);
+        PlayerPrefs.SetInt("CurrentLevel", unlockLevel);
         PlayerPrefs.Save();
-        Debug.Log("DEV HACK THÀNH CÔNG: Đã cạy khoá toàn bộ " + totalLevels + " Level!");
+        Debug.Log("DEV HACK THÀNH CÔNG: Đã cạy khoá toàn bộ " + unlockLevel + " Level!");
 
         // Nếu game đang chạy (Play Mode) thì giựt sập load lại cảnh để áp dụng ngay lập tức
         if (Application.isPlaying)
