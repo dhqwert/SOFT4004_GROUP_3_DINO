@@ -21,6 +21,10 @@ public class AdManager : MonoBehaviour
 
     private Action onRewardedCallback;
 
+    private Action pendingInterstitialFinish;
+
+    private bool isRewardEarnedTemporary = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -100,6 +104,36 @@ public class AdManager : MonoBehaviour
             });
     }
 
+    private void InterstitialOnClosed()
+    {
+        if (interstitialAd != null)
+        {
+            interstitialAd.OnAdFullScreenContentClosed -= InterstitialOnClosed;
+            interstitialAd.OnAdFullScreenContentFailed -= InterstitialOnFailed;
+        }
+
+        Action finish = pendingInterstitialFinish;
+        pendingInterstitialFinish = null;
+
+        LoadInterstitialAd();
+        finish?.Invoke();
+    }
+
+    private void InterstitialOnFailed(AdError error)
+    {
+        if (interstitialAd != null)
+        {
+            interstitialAd.OnAdFullScreenContentClosed -= InterstitialOnClosed;
+            interstitialAd.OnAdFullScreenContentFailed -= InterstitialOnFailed;
+        }
+
+        Action finish = pendingInterstitialFinish;
+        pendingInterstitialFinish = null;
+
+        LoadInterstitialAd();
+        finish?.Invoke();
+    }
+
     // Hàm do GameManager gọi khi đập thủng tầng cuối cùng
     public void ShowInterstitialAdIfReady(int currentLevel, Action onAdFinished)
     {
@@ -124,21 +158,10 @@ public class AdManager : MonoBehaviour
         {
             levelWinCount = 0; // Trả đồng hồ đếm về số 0
 
-            // Bắt sự kiện khi người dùng BẤM DẤU [X] TẮT QUẢNG CÁO
-            interstitialAd.OnAdFullScreenContentClosed += () =>
-            {
-                LoadInterstitialAd(); // Chuẩn bị cuốn chiếu tải săn QC mới
-                onAdFinished?.Invoke(); // Tiếp tục ném ng chơi sang Scene tiếp theo
-            };
+            pendingInterstitialFinish = onAdFinished;
+            interstitialAd.OnAdFullScreenContentClosed += InterstitialOnClosed;
+            interstitialAd.OnAdFullScreenContentFailed += InterstitialOnFailed;
 
-            // Hoặc lỡ lỗi sập QC
-            interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
-            {
-                LoadInterstitialAd();
-                onAdFinished?.Invoke();
-            };
-
-            // HÚ KO QUẢNG CÁO BAY VÀO MẶTTTT
             interstitialAd.Show();
         }
         else
@@ -146,7 +169,6 @@ public class AdManager : MonoBehaviour
             onAdFinished?.Invoke(); // Trình độ hụt thì qua màn tự nhiên
         }
     }
-    private bool isRewardEarnedTemporary = false; // Biến nhớ cờ: Lát nữa tắt ads là phải hồi sinh
 
     #endregion
 
@@ -172,6 +194,37 @@ public class AdManager : MonoBehaviour
             });
     }
 
+    private void RewardedOnClosed()
+    {
+        if (rewardedAd != null)
+        {
+            rewardedAd.OnAdFullScreenContentClosed -= RewardedOnClosed;
+            rewardedAd.OnAdFullScreenContentFailed -= RewardedOnFailed;
+        }
+
+        LoadRewardedAd();
+
+        if (isRewardEarnedTemporary)
+        {
+            onRewardedCallback?.Invoke();
+            isRewardEarnedTemporary = false;
+        }
+        onRewardedCallback = null;
+    }
+
+    private void RewardedOnFailed(AdError error)
+    {
+        if (rewardedAd != null)
+        {
+            rewardedAd.OnAdFullScreenContentClosed -= RewardedOnClosed;
+            rewardedAd.OnAdFullScreenContentFailed -= RewardedOnFailed;
+        }
+
+        LoadRewardedAd();
+        isRewardEarnedTemporary = false;
+        onRewardedCallback = null;
+    }
+
     public void ShowRewardedAd(Action onRewardEarned)
     {
         // 1. Đặc quyền VIP: Chạm vào hồi sinh luôn khỏi mất công nạp xem video
@@ -185,31 +238,15 @@ public class AdManager : MonoBehaviour
         if (rewardedAd != null && rewardedAd.CanShowAd())
         {
             onRewardedCallback = onRewardEarned;
-            isRewardEarnedTemporary = false; // Ban đầu là chưa có quà
+            isRewardEarnedTemporary = false;
 
-            // Sự kiện khi bấm DẤU X ĐÓNG Video
-            rewardedAd.OnAdFullScreenContentClosed += () =>
-            {
-                LoadRewardedAd(); // Lên đạn sẵn cho ván sau
-                
-                // NẾU LÚC NÃY XEM ĐỦ GIỜ RỒI THÌ BÂY GIỜ LÚC ĐÓNG ADS MỚI LÀ LÚC THỰC THI HỒI SINH
-                if (isRewardEarnedTemporary) 
-                {
-                    onRewardedCallback?.Invoke();
-                    isRewardEarnedTemporary = false; // Làm sạch trí nhớ
-                }
-            };
-            
-            rewardedAd.OnAdFullScreenContentFailed += (AdError error) =>
-            {
-                LoadRewardedAd();
-            };
+            rewardedAd.OnAdFullScreenContentClosed += RewardedOnClosed;
+            rewardedAd.OnAdFullScreenContentFailed += RewardedOnFailed;
 
-            // Sự kiện NGẦM khi người chơi XEM ĐỦ SỐ GIÂY (Chưa tắt Ads đâu nhé)
             rewardedAd.Show((Reward reward) =>
             {
                 Debug.Log($"Ngon, người chơi đã xem đủ số phút quy định!");
-                isRewardEarnedTemporary = true; // Chỉ đánh dấu cờ nhớ là "Đáng được cứu"
+                isRewardEarnedTemporary = true;
             });
         }
         else

@@ -3,6 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class SettingManager : MonoBehaviour
 {
+    static SkinManager FindSkinManager()
+    {
+        SkinManager[] managers = Object.FindObjectsByType<SkinManager>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        return managers != null && managers.Length > 0 ? managers[0] : null;
+    }
+
+    static LeagueManager FindLeagueManager()
+    {
+        LeagueManager[] managers = Object.FindObjectsByType<LeagueManager>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        return managers != null && managers.Length > 0 ? managers[0] : null;
+    }
+
     // Bấm Nút này để cháy túi
     public void ResetCoin()
     {
@@ -10,8 +22,7 @@ public class SettingManager : MonoBehaviour
         PlayerPrefs.Save();
         Debug.Log(">> Đã Reset sạch số Vàng (Coin)!");
         
-        // Quát thằng Skin Manager sơn lại giao diện tiền Vàng
-        FindObjectOfType<SkinManager>()?.RefreshUI();
+        FindSkinManager()?.RefreshUI();
     }
 
     // Bấm Nút này để rớt đài Xếp hạng
@@ -21,8 +32,7 @@ public class SettingManager : MonoBehaviour
         PlayerPrefs.Save();
         Debug.Log(">> Đã Reset sạch Điểm Xếp Hạng (League Score)!");
         
-        // Cập nhật tụt mốc rớt đài mũi tên điểm
-        FindObjectOfType<LeagueManager>()?.RefreshLeague();
+        FindLeagueManager()?.RefreshLeague();
     }
 
     // Bấm Nút này để trả game về Màn 1
@@ -50,11 +60,10 @@ public class SettingManager : MonoBehaviour
         PlayerPrefs.DeleteKey("SkinColorB");
         PlayerPrefs.Save();
         
-        // Dội nước gọi SkinManager lôi ổ khóa ra khóa cửa hàng lại
-        FindObjectOfType<SkinManager>()?.RefreshUI();
+        SkinManager skinMgr = FindSkinManager();
+        skinMgr?.RefreshUI();
         
-        // Trả bóng về màu nguyên thủy sơ khai nhất
-        Material ballMat = FindObjectOfType<SkinManager>()?.globalBallMaterial;
+        Material ballMat = skinMgr?.globalBallMaterial;
         if(ballMat != null) ballMat.color = Color.white; 
 
         Debug.Log(">> Đã lột sạch Skin, trả về trái bóng mặc định!");

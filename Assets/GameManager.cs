@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText; // Kéo thả cái Text hiển thị điểm vào đây
     public TextMeshProUGUI coinText;  // Kéo thả cái Text hiển thị vàng vào đây
 
+    [Header("Hồi sinh")]
+    [Tooltip("Đẩy bóng (tag Player) lên sau khi xem video hồi sinh")]
+    public float reviveUpwardOffset = 2f;
+
     private int currentScore = 0;
     private int currentCoins = 0;
 
@@ -63,7 +67,7 @@ public class GameManager : MonoBehaviour
     // ====== CHỨC NĂNG LƯU ĐIỂM XẾP HẠNG ======
     public void WinLevel()
     {
-        if (levelWin) return; // Chống spam kẹt cứng khi đập vào vạch nhiều lần
+        if (instance == null || levelWin) return;
         levelWin = true;
 
         // Cộng điểm ván này vào Kho điểm Xếp Hạng Trọn Đời
@@ -79,18 +83,32 @@ public class GameManager : MonoBehaviour
     // (Bấm nút này sẽ mở xem Video, xem xong thực thi hàm Hồi Sinh)
     public void RevivePlayer()
     {
+        void DoRevive()
+        {
+            gameOver = false;
+            if (gameOverPannal != null) {
+                gameOverPannal.SetActive(false);
+            }
+            Time.timeScale = 1;
+
+            GameObject playerGo = GameObject.FindGameObjectWithTag("Player");
+            if (playerGo != null) {
+                Ball ball = playerGo.GetComponent<Ball>();
+                if (ball != null) {
+                    ball.ApplyReviveNudge(reviveUpwardOffset);
+                } else {
+                    playerGo.transform.position += Vector3.up * reviveUpwardOffset;
+                }
+            }
+        }
+
         if (AdManager.instance != null)
         {
-            AdManager.instance.ShowRewardedAd(() => {
-                // LOGIC HỒI SINH SAU KHI XEM XONG VIDEO
-                gameOver = false;
-                gameOverPannal.SetActive(false);
-                Time.timeScale = 1;
-
-                // Ghi chú: Nếu quả bóng đang kẹt vào cái gai màu đỏ, bạn phải nhấc nó lên một chút bằng script Ball
-                // Ví dụ (Tuỳ code chướng ngại vật của bạn): 
-                // GameObject.FindObjectOfType<Player>().transform.position += Vector3.up * 2f; 
-            });
+            AdManager.instance.ShowRewardedAd(DoRevive);
+        }
+        else
+        {
+            DoRevive();
         }
     }
 
@@ -103,7 +121,9 @@ public class GameManager : MonoBehaviour
     private void Update () {
         if(gameOver) {
             Time.timeScale = 0; 
-            gameOverPannal.SetActive (true); 
+            if (gameOverPannal != null) {
+                gameOverPannal.SetActive (true); 
+            }
             
             // Xóa cái đoạn Bấm chuột nạp lại bàn chơi mặc định (nhường đường cho nút Restart và Revive UI)
             // if(Input.GetMouseButtonDown(0)) {
@@ -112,7 +132,9 @@ public class GameManager : MonoBehaviour
         }
 
         if(levelWin) {
-            levelWinPannal.SetActive (true); 
+            if (levelWinPannal != null) {
+                levelWinPannal.SetActive (true); 
+            }
 
             // Cập nhật: Khi nhấp màn hình sang màn mới, kiểm tra chiếu QC trước
             if(Input.GetMouseButtonDown (0)) {
@@ -121,11 +143,15 @@ public class GameManager : MonoBehaviour
                     // Nhờ AdManager xét duyệt xuất hiện quảng cáo
                     AdManager.instance.ShowInterstitialAdIfReady(SceneManager.GetActiveScene().buildIndex, () => {
                         // Action sau khi đóng quảng cáo (Hoặc không được hiện qc)
-                        LevelManager.instance.PassLevelAndLoadNext();
+                        if (LevelManager.instance != null) {
+                            LevelManager.instance.PassLevelAndLoadNext();
+                        }
                     });
                 } else {
                     // Đề phòng trường hợp lỗi chưa thả AdManager vào Scene
-                    LevelManager.instance.PassLevelAndLoadNext();
+                    if (LevelManager.instance != null) {
+                        LevelManager.instance.PassLevelAndLoadNext();
+                    }
                 }
 
                 // Chặn không cho gọi hàm nhiều lần
