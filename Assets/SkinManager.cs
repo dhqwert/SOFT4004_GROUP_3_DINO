@@ -50,7 +50,17 @@ public class SkinManager : MonoBehaviour
     // Hàm Phủi mông sơn lại Giao diện Shop mỗi khi có đứa Mua hàng xong
     public void RefreshUI()
     {
-        // Quét rác: Xóa sạch các cục ô vuông cũ mèm đi
+        // Khi SettingManager gọi RefreshUI lúc SkinPanel còn chưa được kích hoạt
+        // hoặc Inspector chưa kéo container/database, cần guard để không văng NRE.
+        if (skinContainer == null || database == null || skinNodePrefab == null)
+        {
+            if (menuCoinText != null)
+            {
+                menuCoinText.text = PlayerPrefs.GetInt("TotalCoins", 0).ToString();
+            }
+            return;
+        }
+
         foreach (Transform child in skinContainer) 
         {
             Destroy(child.gameObject);

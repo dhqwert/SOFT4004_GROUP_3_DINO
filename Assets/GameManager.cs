@@ -70,13 +70,34 @@ public class GameManager : MonoBehaviour
         if (instance == null || levelWin) return;
         levelWin = true;
 
-        // Cộng điểm ván này vào Kho điểm Xếp Hạng Trọn Đời
-        int tempTotalScore = PlayerPrefs.GetInt("TotalLeagueScore", 0);
-        tempTotalScore += currentScore;
-        PlayerPrefs.SetInt("TotalLeagueScore", tempTotalScore);
-        PlayerPrefs.Save();
-        
-        Debug.Log("Tích luỹ thành công! Tổng điểm Xếp Hạng hiện tại: " + tempTotalScore);
+        int earnedScore = currentScore;
+
+        FirebaseLeaderboardService firebase = FirebaseLeaderboardService.instance;
+        if (firebase != null && firebase.IsConfigured)
+        {
+            firebase.AddScoreToLocalPlayer(earnedScore, (ok, newTotal, seasonChanged) =>
+            {
+                if (ok)
+                {
+                    if (seasonChanged)
+                    {
+                        Debug.Log("[Firebase] Mùa giải mới! Điểm reset, bắt đầu lại với " + newTotal);
+                    }
+                    else
+                    {
+                        Debug.Log("[Firebase] Đã cộng " + earnedScore + " điểm. Tổng mùa hiện tại: " + newTotal);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("[Firebase] Không push được điểm. Vui lòng kiểm tra kết nối mạng.");
+                }
+            });
+        }
+        else
+        {
+            Debug.LogWarning("Firebase chưa cấu hình. Điểm " + earnedScore + " bị mất vì không có local fallback.");
+        }
     }
 
     // ====== CHỨC NĂNG HỒI SINH ======

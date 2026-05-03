@@ -28,10 +28,11 @@ public class PlayerPrefsMigration
             PlayerPrefs.SetInt("TotalCoins", 0);
         }
 
-        int totalLeagueScore = PlayerPrefs.GetInt("TotalLeagueScore", 0);
-        if (totalLeagueScore < 0)
+        // League score giờ lưu trên Firebase (FirebaseLeaderboardService),
+        // dọn key cũ "TotalLeagueScore" để tránh nhầm lẫn khi debug.
+        if (PlayerPrefs.HasKey("TotalLeagueScore"))
         {
-            PlayerPrefs.SetInt("TotalLeagueScore", 0);
+            PlayerPrefs.DeleteKey("TotalLeagueScore");
         }
 
         int removeAds = PlayerPrefs.GetInt("RemoveAds", 0);
