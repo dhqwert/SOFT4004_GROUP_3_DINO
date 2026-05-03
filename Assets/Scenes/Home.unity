@@ -6759,7 +6759,7 @@ MonoBehaviour:
   nodePrefab: {fileID: 5998381622495344073, guid: 5f037a856af34954a95cef7dd05d0b2c, type: 3}
   container: {fileID: 343439820}
   coinText: {fileID: 985668708}
-  totalLevels: 10
+  totalLevels: 15
 --- !u!114 &1270021979
 MonoBehaviour:
   m_ObjectHideFlags: 0

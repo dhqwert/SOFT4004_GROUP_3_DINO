@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
     // Nút Bỏ qua hồi sinh, chơi lại từ đầu
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("GamePlay");
     }
 
     private void Update () {
@@ -141,7 +141,8 @@ public class GameManager : MonoBehaviour
                 
                 if (AdManager.instance != null) {
                     // Nhờ AdManager xét duyệt xuất hiện quảng cáo
-                    AdManager.instance.ShowInterstitialAdIfReady(SceneManager.GetActiveScene().buildIndex, () => {
+                    int playingLevel = PlayerPrefs.GetInt("PlayingLevel", 1);
+                    AdManager.instance.ShowInterstitialAdIfReady(playingLevel, () => {
                         // Action sau khi đóng quảng cáo (Hoặc không được hiện qc)
                         if (LevelManager.instance != null) {
                             LevelManager.instance.PassLevelAndLoadNext();

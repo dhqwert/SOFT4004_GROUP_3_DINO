@@ -8,8 +8,8 @@ public class LevelProgressUI : MonoBehaviour
 
     private void Start()
     {
-        // Lấy Level dựa trên Build Index của Scene hiện tại (thay vì lấy mốc cao nhất từ PlayerPrefs)
-        int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        // Lấy Level đang chơi từ PlayerPrefs (được set ở LevelMapManager)
+        int currentLevel = PlayerPrefs.GetInt("PlayingLevel", 1);
 
         // Hiển thị lên giao diện
         currentLevelText.text = currentLevel.ToString(); // Vòng tròn bên trái
