@@ -15,6 +15,9 @@ public class Ring : MonoBehaviour
     }
 
     private void Update () {
+        // Không phá vỡ vòng khi đang ở màn hình chiến thắng hoặc game over
+        if (GameManager.levelWin || GameManager.gameOver) return;
+
         if(transform.position.y > player.position.y + 0.1f) {
             
             // --- CỘNG ĐIỂM VÀ VÀNG ---

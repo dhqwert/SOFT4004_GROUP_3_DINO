@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public static bool gameOver;
     public static bool levelWin;
 
+    // Cờ chặn: đang trong quá trình xử lý sang màn mới (chờ ad / chờ scene load)
+    private bool _isProcessingLevel = false;
+
     public GameObject gameOverPannal;
     public GameObject levelWinPannal;
 
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         gameOver = false;
         levelWin = false;
+        _isProcessingLevel = false; // Reset cờ mỗi khi vào màn mới
         Time.timeScale = 1; 
         
         currentScore = 0; // Bắt đầu màn luôn là 0 điểm
@@ -69,6 +73,13 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null || levelWin) return;
         levelWin = true;
+
+        Debug.Log("[WinLevel] Đã đánh dấu thắng! levelWin = true. Hiện panel.");
+
+        // Hiện panel chiến thắng ngay lập tức (không cần chờ Update)
+        if (levelWinPannal != null) {
+            levelWinPannal.SetActive(true);
+        }
 
         // Cộng điểm ván này vào Kho điểm Xếp Hạng Trọn Đời
         int tempTotalScore = PlayerPrefs.GetInt("TotalLeagueScore", 0);
@@ -124,40 +135,62 @@ public class GameManager : MonoBehaviour
             if (gameOverPannal != null) {
                 gameOverPannal.SetActive (true); 
             }
-            
-            // Xóa cái đoạn Bấm chuột nạp lại bàn chơi mặc định (nhường đường cho nút Restart và Revive UI)
-            // if(Input.GetMouseButtonDown(0)) {
-            //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            // }
         }
 
         if(levelWin) {
+            // Dừng mọi vật lý để ngăn cột tự tan rã trong khi đang ở màn hình chiến thắng
+            Time.timeScale = 0;
+
             if (levelWinPannal != null) {
                 levelWinPannal.SetActive (true); 
             }
 
-            // Cập nhật: Khi nhấp màn hình sang màn mới, kiểm tra chiếu QC trước
-            if(Input.GetMouseButtonDown (0)) {
-                
-                if (AdManager.instance != null) {
-                    // Nhờ AdManager xét duyệt xuất hiện quảng cáo
-                    int playingLevel = PlayerPrefs.GetInt("PlayingLevel", 1);
-                    AdManager.instance.ShowInterstitialAdIfReady(playingLevel, () => {
-                        // Action sau khi đóng quảng cáo (Hoặc không được hiện qc)
-                        if (LevelManager.instance != null) {
-                            LevelManager.instance.PassLevelAndLoadNext();
-                        }
-                    });
-                } else {
-                    // Đề phòng trường hợp lỗi chưa thả AdManager vào Scene
-                    if (LevelManager.instance != null) {
-                        LevelManager.instance.PassLevelAndLoadNext();
-                    }
-                }
-
-                // Chặn không cho gọi hàm nhiều lần
-                levelWin = false; 
+            // Fallback: nếu "Go to next level" là Text thường (không phải Button),
+            // click bất kỳ vị trí nào trên màn hình vẫn sẽ chuyển sang màn mới
+            if(Input.GetMouseButtonDown(0) && !_isProcessingLevel) {
+                NextLevelAction();
             }
         }
+    }
+
+    // Nút Giao diện Next Level gọi hàm này (gắn trực tiếp vào Button OnClick)
+    public void NextLevelAction()
+    {
+        // Chặn bấm đúp - nếu đang xử lý rồi thì bỏ qua hoàn toàn
+        if (_isProcessingLevel) {
+            Debug.Log("[NextLevel] Đang xử lý, bỏ qua click đúp.");
+            return;
+        }
+        _isProcessingLevel = true;
+        levelWin = false;
+
+        if (AdManager.instance != null) {
+            int playingLevel = PlayerPrefs.GetInt("PlayingLevel", 1);
+            AdManager.instance.ShowInterstitialAdIfReady(playingLevel, () => {
+                // Callback này chỉ chạy 1 lần duy nhất sau khi ad đóng hoặc bị bỏ qua
+                ProceedToNextLevel();
+            });
+        } else {
+            ProceedToNextLevel();
+        }
+    }
+
+    // Xử lý nạp cảnh và lưu game an toàn - chỉ được gọi đúng 1 lần
+    private void ProceedToNextLevel()
+    {
+        Debug.Log("[NextLevel] ProceedToNextLevel() được gọi.");
+        
+        // Tính toán và lưu NGAY LẬP TỨC trước khi load scene
+        int current = PlayerPrefs.GetInt("PlayingLevel", 1);
+        int next = current + 1;
+        int maxUnlocked = PlayerPrefs.GetInt("CurrentLevel", 1);
+        if (next > maxUnlocked) PlayerPrefs.SetInt("CurrentLevel", next);
+        PlayerPrefs.SetInt("PlayingLevel", next);
+        PlayerPrefs.Save();
+        
+        Debug.Log($"[NextLevel] Đã lưu PlayingLevel = {next}, bắt đầu load scene GamePlay.");
+        
+        // Load scene - không phụ thuộc vào LevelManager nữa
+        SceneManager.LoadScene("GamePlay");
     }
 }
