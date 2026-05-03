@@ -43,6 +43,11 @@ public class Ball : MonoBehaviour
             GameManager.instance?.WinLevel();
             if (AudioManager.instance != null) AudioManager.instance.Play("GameWin");
         }
+        // Reset combo khi chạm tầng
+        if (ComboManager.instance != null)
+        {
+            ComboManager.instance.ResetCombo();
+        }
     }
 
     static bool TryGetCollisionMaterialName(Collision other, out string materialName)

@@ -1,18 +1,21 @@
 using UnityEngine;
 using TMPro;
+
 public class LevelProgressUI : MonoBehaviour
 {
-    // Kéo thả 2 cái Text của 2 vòng tròn vào đây
-    public TextMeshProUGUI currentLevelText; 
+    public TextMeshProUGUI currentLevelText;
     public TextMeshProUGUI nextLevelText;
 
-    private void Start()
+    void Start()
     {
-        // Lấy Level dựa trên Build Index của Scene hiện tại (thay vì lấy mốc cao nhất từ PlayerPrefs)
-        int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+        RefreshUI(currentLevel);
+    }
 
-        // Hiển thị lên giao diện
-        currentLevelText.text = currentLevel.ToString(); // Vòng tròn bên trái
-        nextLevelText.text = (currentLevel + 1).ToString(); // Vòng tròn bên phải (+1)
+    // Gọi từ GameSceneController khi sang level mới
+    public void RefreshUI(int level)
+    {
+        if (currentLevelText != null) currentLevelText.text = level.ToString();
+        if (nextLevelText != null) nextLevelText.text = (level + 1).ToString();
     }
 }

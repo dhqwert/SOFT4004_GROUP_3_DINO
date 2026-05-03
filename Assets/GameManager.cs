@@ -70,13 +70,26 @@ public class GameManager : MonoBehaviour
         if (instance == null || levelWin) return;
         levelWin = true;
 
-        // Cộng điểm ván này vào Kho điểm Xếp Hạng Trọn Đời
+        // --- THƯỞNG CUỐI MÀN theo level ---
+        int level = PlayerPrefs.GetInt("CurrentLevel", 1);
+        int bonusScore = level * 100; // Level 1=100đ, Level 10=1000đ, Level 20=2000đ
+        int bonusCoins = level * 2;   // Level 1=2 vàng, Level 10=20 vàng
+
+        currentScore += bonusScore;
+        currentCoins += bonusCoins;
+        PlayerPrefs.SetInt("TotalCoins", currentCoins);
+        PlayerPrefs.Save();
+        UpdateUI();
+
+        Debug.Log($"[Level {level}] Thưởng cuối màn: +{bonusScore} điểm, +{bonusCoins} vàng");
+
+        // Cộng vào bảng xếp hạng
         int tempTotalScore = PlayerPrefs.GetInt("TotalLeagueScore", 0);
         tempTotalScore += currentScore;
         PlayerPrefs.SetInt("TotalLeagueScore", tempTotalScore);
         PlayerPrefs.Save();
-        
-        Debug.Log("Tích luỹ thành công! Tổng điểm Xếp Hạng hiện tại: " + tempTotalScore);
+
+        Debug.Log("Tổng điểm xếp hạng: " + tempTotalScore);
     }
 
     // ====== CHỨC NĂNG HỒI SINH ======
@@ -115,7 +128,21 @@ public class GameManager : MonoBehaviour
     // Nút Bỏ qua hồi sinh, chơi lại từ đầu
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameOver = false;
+        levelWin = false;
+        Time.timeScale = 1f;
+        currentScore = 0;
+        UpdateUI();
+
+        if (gameOverPannal != null) gameOverPannal.SetActive(false);
+        if (levelWinPannal != null) levelWinPannal.SetActive(false);
+
+        // Sinh lại đúng level hiện tại (không tăng số)
+        int current = PlayerPrefs.GetInt("CurrentLevel", 1);
+        if (GameSceneController.instance != null)
+            GameSceneController.instance.helixManager.GenerateForLevel(current);
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Update () {
@@ -138,25 +165,47 @@ public class GameManager : MonoBehaviour
 
             // Cập nhật: Khi nhấp màn hình sang màn mới, kiểm tra chiếu QC trước
             if(Input.GetMouseButtonDown (0)) {
-                
-                if (AdManager.instance != null) {
-                    // Nhờ AdManager xét duyệt xuất hiện quảng cáo
+
+                // THAY BẰNG:
+                if (AdManager.instance != null)
+                {
                     AdManager.instance.ShowInterstitialAdIfReady(SceneManager.GetActiveScene().buildIndex, () => {
-                        // Action sau khi đóng quảng cáo (Hoặc không được hiện qc)
-                        if (LevelManager.instance != null) {
-                            LevelManager.instance.PassLevelAndLoadNext();
-                        }
+                        GoNextLevel(); // ← gọi hàm mới
                     });
-                } else {
-                    // Đề phòng trường hợp lỗi chưa thả AdManager vào Scene
-                    if (LevelManager.instance != null) {
-                        LevelManager.instance.PassLevelAndLoadNext();
-                    }
+                }
+                else
+                {
+                    GoNextLevel(); // ← gọi hàm mới
                 }
 
                 // Chặn không cho gọi hàm nhiều lần
                 levelWin = false; 
             }
+        }
+    }
+    public void GoNextLevel()
+    {
+        int next = PlayerPrefs.GetInt("CurrentLevel", 1) + 1;
+        PlayerPrefs.SetInt("CurrentLevel", next);
+        PlayerPrefs.Save();
+
+        // Nếu GameSceneController tồn tại → sinh level mới ngay tại chỗ
+        if (GameSceneController.instance != null)
+        {
+            gameOver = false;
+            levelWin = false;
+            Time.timeScale = 1f;
+            currentScore = 0;
+            UpdateUI();
+
+            if (levelWinPannal != null) levelWinPannal.SetActive(false);
+
+            GameSceneController.instance.OnLevelComplete();
+        }
+        else
+        {
+            // Fallback: load lại scene Level1 như cũ
+            SceneManager.LoadScene("Level1");
         }
     }
 }
