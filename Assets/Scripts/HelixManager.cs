@@ -15,10 +15,19 @@ public class HelixManager : MonoBehaviour
     public int minSafeStreak = 1;
     public int maxSafeStreak = 3;
 
+    [Header("Item Spawning")]
+    public GameObject coinPrefab;
+    public GameObject piercePrefab;
+    [Range(0f, 1f)] public float itemSpawnChance = 0.5f; // Tăng tỉ lệ ra item lên 50%
+    [Range(0f, 1f)] public float pierceSpawnChance = 0.25f; // Trong số item sinh ra, 25% là xuyên phá
+
     float yPos;
     float runtimeUnsafeChance;
     int runtimeTotalRings;
     int safeCountdown;
+    
+    // Material được tạo ra để dùng chung cho tất cả các nấc an toàn trong màn chơi này
+    Material currentLevelSafeMat;
 
     private void Start()
     {
@@ -29,6 +38,9 @@ public class HelixManager : MonoBehaviour
 
         int level = Mathf.Max(PlayerPrefs.GetInt("PlayingLevel", 1), 1);
         
+        // Tạo bảng màu an toàn cho màn chơi này
+        CreateLevelSafeMaterial(level);
+
         // Hệ số giới hạn độ khó (max ở level 100 thay vì 30)
         float t = Mathf.Clamp01((level - 1f) / 100f);
         
@@ -157,32 +169,136 @@ public class HelixManager : MonoBehaviour
         yPos -= ringDistance;
         newRing.transform.parent = transform;
 
-        // Nếu được yêu cầu là vòng Beginner (an toàn tuyệt đối)
-        if (forceSafe)
+        // Quét và sơn lại màu cho các nấc
+        Renderer[] renderers = newRing.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers)
         {
-            // 1. Tìm Material an toàn (màu bình thường) trên chính vòng này
-            Material safeMat = null;
-            Renderer[] renderers = newRing.GetComponentsInChildren<Renderer>();
-            foreach (Renderer r in renderers)
+            if (r.sharedMaterial != null)
             {
-                if (r.sharedMaterial != null && r.sharedMaterial.name.Contains("Safe"))
+                if (r.sharedMaterial.name.Contains("Unsafe"))
                 {
-                    safeMat = r.sharedMaterial;
-                    break; // Đã tìm thấy mẫu
+                    if (forceSafe)
+                    {
+                        // Nếu vòng này ép an toàn tuyệt đối, bẫy cũng phải sơn màu an toàn
+                        if (currentLevelSafeMat != null) r.sharedMaterial = currentLevelSafeMat;
+                    }
+                    // Ngược lại: Bẫy giữ nguyên màu gốc (đen)
+                }
+                else if (r.sharedMaterial.name.Contains("Safe"))
+                {
+                    // Các nấc an toàn thì dùng màu chung của Level
+                    if (currentLevelSafeMat != null) r.sharedMaterial = currentLevelSafeMat;
                 }
             }
+        }
 
-            // 2. Tìm tất cả các mảnh bẫy (Unsafe) và sơn lại thành Safe
-            if (safeMat != null)
+        // --- Spawning Items ---
+        if (index != 0 && index != rings.Length - 1)
+        {
+            if (Random.value < itemSpawnChance)
             {
-                foreach (Renderer r in renderers)
+                bool isPierce = Random.value < pierceSpawnChance;
+                GameObject prefabToSpawn = isPierce ? piercePrefab : coinPrefab;
+                
+                Renderer[] parts = newRing.GetComponentsInChildren<Renderer>();
+                if (parts.Length > 0)
                 {
-                    if (r.sharedMaterial != null && r.sharedMaterial.name.Contains("Unsafe"))
+                    Renderer randomPart = parts[Random.Range(0, parts.Length)];
+                    
+                    if (Random.value < 0.5f)
                     {
-                        r.sharedMaterial = safeMat; 
+                        // Đặt trên nấc
+                        Vector3 spawnPos = randomPart.bounds.center;
+                        spawnPos.y = newRing.transform.position.y + 0.8f; 
+                        SpawnItemAt(prefabToSpawn, spawnPos, newRing.transform, isPierce);
+                    }
+                    else
+                    {
+                        // Đặt ở khe (hoặc vị trí ngẫu nhiên trên cung tròn)
+                        Vector3 partCenter = randomPart.bounds.center;
+                        partCenter.y = newRing.transform.position.y;
+                        float ringRadius = Vector3.Distance(partCenter, newRing.transform.position);
+                        if (ringRadius < 0.5f) ringRadius = 2.5f; // Đề phòng trường hợp lỗi tâm
+                        
+                        float randomAngle = Random.Range(0f, 360f);
+                        Vector3 offset = Quaternion.Euler(0, randomAngle, 0) * Vector3.forward * ringRadius;
+                        Vector3 spawnPos = newRing.transform.position + offset;
+                        spawnPos.y = newRing.transform.position.y + 0.8f;
+                        
+                        SpawnItemAt(prefabToSpawn, spawnPos, newRing.transform, isPierce);
                     }
                 }
             }
+        }
+    }
+
+    void SpawnItemAt(GameObject prefab, Vector3 pos, Transform parent, bool isPierce)
+    {
+        if (prefab != null)
+        {
+            Instantiate(prefab, pos, prefab.transform.rotation, parent);
+        }
+        else
+        {
+            // Tự động tạo item nếu chưa gán prefab (để có thể "chỉ play")
+            GameObject item = GameObject.CreatePrimitive(isPierce ? PrimitiveType.Cube : PrimitiveType.Sphere);
+            item.transform.position = pos;
+            item.transform.parent = parent;
+            item.transform.localScale = Vector3.one * 0.5f;
+            
+            Collider col = item.GetComponent<Collider>();
+            if (col != null) {
+                col.isTrigger = true;
+                // Kích thước vừa phải để tránh chạm ngoài rìa
+                if (col is BoxCollider bc) bc.size = new Vector3(1.2f, 1.2f, 1.2f);
+                if (col is SphereCollider sc) sc.radius = 1.0f;
+            }
+            
+            ItemPickup pickup = item.AddComponent<ItemPickup>();
+            pickup.itemType = isPierce ? ItemType.Piercing : ItemType.Coin;
+            
+            Renderer rend = item.GetComponent<Renderer>();
+            if (rend != null) {
+                rend.material.color = isPierce ? Color.red : Color.yellow;
+            }
+        }
+    }
+
+    void CreateLevelSafeMaterial(int level)
+    {
+        // 1. Tìm 1 material Safe mẫu từ các Prefab rings để copy thuộc tính vật lý, shader,...
+        Material baseMat = null;
+        foreach (GameObject ring in rings) {
+            if (ring == null) continue;
+            Renderer[] rs = ring.GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in rs) {
+                if (r.sharedMaterial != null && r.sharedMaterial.name.Contains("Safe")) {
+                    baseMat = r.sharedMaterial;
+                    break;
+                }
+            }
+            if (baseMat != null) break;
+        }
+
+        if (baseMat != null)
+        {
+            currentLevelSafeMat = new Material(baseMat);
+            
+            // Logic màu sắc: Cứ 5 level đổi hệ màu 1 lần
+            int colorGroup = (level - 1) / 5;
+            int subLevel = (level - 1) % 5;
+
+            // 0.618f là Tỷ lệ vàng (Golden Ratio), nhân vào giúp màu không bao giờ bị trùng và phân bổ đều cầu vồng
+            float h = (colorGroup * 0.618034f) % 1.0f; 
+            
+            // Saturation: Nhạt (0.2) đến Đậm dần (0.9)
+            float s = Mathf.Lerp(0.2f, 0.9f, subLevel / 4f);
+            
+            // Value (Độ sáng): Sáng rực rỡ (1.0) đến tối đi một chút để đậm đà (0.75)
+            float v = Mathf.Lerp(1.0f, 0.75f, subLevel / 4f);
+
+            Color newColor = Color.HSVToRGB(h, s, v);
+            currentLevelSafeMat.color = newColor;
         }
     }
 }

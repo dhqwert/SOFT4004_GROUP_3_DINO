@@ -21,12 +21,17 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText; // Kéo thả cái Text hiển thị điểm vào đây
     public TextMeshProUGUI coinText;  // Kéo thả cái Text hiển thị vàng vào đây
 
+    [Header("Giao diện Tổng Kết (Win Summary)")]
+    public TextMeshProUGUI winScoreText;
+    public TextMeshProUGUI winCoinText;
+
     [Header("Hồi sinh")]
     [Tooltip("Đẩy bóng (tag Player) lên sau khi xem video hồi sinh")]
     public float reviveUpwardOffset = 2f;
 
     private int currentScore = 0;
     private int currentCoins = 0;
+    private int coinsGainedThisLevel = 0;
 
     private void Awake()
     {
@@ -44,6 +49,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1; 
         
         currentScore = 0; // Bắt đầu màn luôn là 0 điểm
+        coinsGainedThisLevel = 0;
         UpdateUI();
     }
 
@@ -53,7 +59,13 @@ public class GameManager : MonoBehaviour
         currentScore += amountToAdd;
         
         // Thưởng 1 Vàng
-        currentCoins += 1;
+        AddCoins(1);
+    }
+
+    public void AddCoins(int amountToAdd)
+    {
+        currentCoins += amountToAdd;
+        coinsGainedThisLevel += amountToAdd;
 
         // Lưu Vàng vào bộ nhớ vĩnh viễn (đóng game không bị mất)
         PlayerPrefs.SetInt("TotalCoins", currentCoins);
@@ -79,6 +91,34 @@ public class GameManager : MonoBehaviour
         // Hiện panel chiến thắng ngay lập tức (không cần chờ Update)
         if (levelWinPannal != null) {
             levelWinPannal.SetActive(true);
+        }
+
+        // Cập nhật text tổng kết (hoặc tự tạo nếu chưa gán)
+        if (winScoreText != null) {
+            winScoreText.text = "Score: " + currentScore;
+        } else if (levelWinPannal != null) {
+            GameObject textObj = new GameObject("DynamicWinScoreText");
+            textObj.transform.SetParent(levelWinPannal.transform, false);
+            winScoreText = textObj.AddComponent<TextMeshProUGUI>();
+            winScoreText.text = "Score: " + currentScore;
+            winScoreText.fontSize = 50;
+            winScoreText.alignment = TextAlignmentOptions.Center;
+            winScoreText.rectTransform.sizeDelta = new Vector2(600, 100); // Thêm size để không bị rớt dòng
+            winScoreText.rectTransform.anchoredPosition = new Vector2(0, 100);
+        }
+
+        if (winCoinText != null) {
+            winCoinText.text = "Earned Coins: +" + coinsGainedThisLevel;
+        } else if (levelWinPannal != null) {
+            GameObject textObj = new GameObject("DynamicWinCoinText");
+            textObj.transform.SetParent(levelWinPannal.transform, false);
+            winCoinText = textObj.AddComponent<TextMeshProUGUI>();
+            winCoinText.text = "Earned Coins: +" + coinsGainedThisLevel;
+            winCoinText.fontSize = 50;
+            winCoinText.color = Color.yellow;
+            winCoinText.alignment = TextAlignmentOptions.Center;
+            winCoinText.rectTransform.sizeDelta = new Vector2(600, 100); // Thêm size để không bị rớt dòng
+            winCoinText.rectTransform.anchoredPosition = new Vector2(0, -50);
         }
 
         // Cộng điểm ván này vào Kho điểm Xếp Hạng Trọn Đời
@@ -138,17 +178,22 @@ public class GameManager : MonoBehaviour
         }
 
         if(levelWin) {
-            // Dừng mọi vật lý để ngăn cột tự tan rã trong khi đang ở màn hình chiến thắng
-            Time.timeScale = 0;
+            // KHÔNG dừng vật lý để mọi thứ diễn ra tự nhiên như Helix Jump thật
+            // Time.timeScale = 0;
 
             if (levelWinPannal != null) {
                 levelWinPannal.SetActive (true); 
             }
 
-            // Fallback: nếu "Go to next level" là Text thường (không phải Button),
-            // click bất kỳ vị trí nào trên màn hình vẫn sẽ chuyển sang màn mới
-            if(Input.GetMouseButtonDown(0) && !_isProcessingLevel) {
-                NextLevelAction();
+            // Chạm vào màn hình để qua màn mới (Ngoại trừ khu vực nút Home ở góc trên bên trái)
+            if (Input.GetMouseButtonDown(0) && !_isProcessingLevel) {
+                // Lấy tọa độ chuột
+                Vector2 mousePos = Input.mousePosition;
+                // Nếu không click vào vùng 20% góc trên bên trái (chỗ nút Home)
+                bool isClickingHome = (mousePos.x < Screen.width * 0.2f && mousePos.y > Screen.height * 0.8f);
+                if (!isClickingHome) {
+                    NextLevelAction();
+                }
             }
         }
     }
