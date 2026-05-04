@@ -7,10 +7,22 @@ public class Ball : MonoBehaviour
     Rigidbody rb;
     public float bounceForce = 400f;
 
+    [Header("Cấu hình xoay")]
+    public float rotationSpeed = 150f; // Tốc độ xoay
+    private Vector3 rotationAxis;     // Trục xoay ngẫu nhiên
+
     public GameObject splitPrefab;
 
     private void Start () {
         rb = GetComponent<Rigidbody> ();
+        // Tạo một trục xoay ngẫu nhiên để quả bóng xoay trông tự nhiên
+        rotationAxis = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+    }
+
+    private void Update()
+    {
+        // Làm cho quả bóng xoay liên tục theo thời gian
+        transform.Rotate(rotationAxis * rotationSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter (Collision other) {

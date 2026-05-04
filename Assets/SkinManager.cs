@@ -8,6 +8,15 @@ public class SkinData
     public Material skinMaterial; 
     [Header("Màu sắc của Mẫu bóng này hiển thị trên bảng UI")]
     public Color previewColor = Color.white; 
+    [Header("Hình ảnh Texture dán lên quả bóng 3D (Tùy chọn)")]
+    public Texture2D skinTexture;
+    [Header("Hình ảnh Sprite hiển thị trong Shop (Tùy chọn)")]
+    public Sprite skinIcon; 
+
+    [Header("Thông số căn chỉnh Texture (X: lặp ngang, Y: lặp dọc)")]
+    public Vector2 tiling = new Vector2(1, 1);
+    public Vector2 offset = new Vector2(0, 0);
+
     public int price = 100;
     [Header("Loại Hàng: 0=Basic, 1=Rare, 2=Funky, 3=Epic")]
     public int tabCategory = 0;
@@ -15,6 +24,9 @@ public class SkinData
 
 public class SkinManager : MonoBehaviour
 {
+    // Biến dùng chung để lưu dữ liệu sang Scene Gameplay
+    public static SkinData[] SharedDatabase;
+
     [Header("Kéo Cục Material Bóng dùng chung (ballMat) vô đây")]
     public Material globalBallMaterial; 
 
@@ -34,13 +46,29 @@ public class SkinManager : MonoBehaviour
 
     void Start()
     {
-        // Vừa vào game, máy sẽ ép cái ballMat về đúng màu gốc đã lưu
+        // Chép dữ liệu vào biến tĩnh để Scene Gameplay có thể đọc được
+        SharedDatabase = database;
+
+        // Vừa vào game, máy sẽ ép cái ballMat về đúng màu và texture gốc đã lưu
         if (globalBallMaterial != null)
         {
-            float r = PlayerPrefs.GetFloat("SkinColorR", 1f); 
-            float g = PlayerPrefs.GetFloat("SkinColorG", 1f);
-            float b = PlayerPrefs.GetFloat("SkinColorB", 1f);
-            globalBallMaterial.color = new Color(r, g, b, 1f);
+            int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
+            if (database != null && selectedSkin >= 0 && selectedSkin < database.Length)
+            {
+                globalBallMaterial.color = database[selectedSkin].previewColor;
+                globalBallMaterial.mainTexture = database[selectedSkin].skinTexture;
+                // Áp dụng Tiling và Offset
+                globalBallMaterial.mainTextureScale = database[selectedSkin].tiling;
+                globalBallMaterial.mainTextureOffset = database[selectedSkin].offset;
+            }
+            else
+            {
+                // Phục hồi cho lần đầu nếu có lỗi
+                float r = PlayerPrefs.GetFloat("SkinColorR", 1f); 
+                float g = PlayerPrefs.GetFloat("SkinColorG", 1f);
+                float b = PlayerPrefs.GetFloat("SkinColorB", 1f);
+                globalBallMaterial.color = new Color(r, g, b, 1f);
+            }
         }
 
         // Khi Shop bật lên thì dọn dẹp cặn bã cũ và tái tạo lại giao diện sạp hàng
@@ -87,7 +115,7 @@ public class SkinManager : MonoBehaviour
             bool isSelected = (i == currentSelected);
 
             // Bơm sinh lực và tham số nạp vào con Node
-            nodeScript.Setup(i, this, database[i].previewColor, database[i].price, isUnlocked, isSelected);
+            nodeScript.Setup(i, this, database[i].previewColor, database[i].skinIcon, database[i].price, isUnlocked, isSelected);
             spawnedNodes.Add(nodeScript);
         }
     }
@@ -112,6 +140,9 @@ public class SkinManager : MonoBehaviour
             // Ép cái Material gốc ballMat nạp màu mới lập tức!
             if (globalBallMaterial != null) {
                 globalBallMaterial.color = database[index].previewColor;
+                globalBallMaterial.mainTexture = database[index].skinTexture;
+                globalBallMaterial.mainTextureScale = database[index].tiling;
+                globalBallMaterial.mainTextureOffset = database[index].offset;
             }
 
             PlayerPrefs.Save();
@@ -141,6 +172,9 @@ public class SkinManager : MonoBehaviour
                 // Tiện tay nhuộm màu luôn cục ballMat cho lóng lánh
                 if (globalBallMaterial != null) {
                     globalBallMaterial.color = database[index].previewColor;
+                    globalBallMaterial.mainTexture = database[index].skinTexture;
+                    globalBallMaterial.mainTextureScale = database[index].tiling;
+                    globalBallMaterial.mainTextureOffset = database[index].offset;
                 }
 
                 PlayerPrefs.Save();
