@@ -31,19 +31,30 @@ public class HelixManager : MonoBehaviour
 
     private void Start()
     {
+        int level = Mathf.Max(PlayerPrefs.GetInt("CurrentLevel", 1), 1);
+        GenerateForLevel(level);
+    }
+
+    public void GenerateForLevel(int level)
+    {
         if (rings == null || rings.Length < 3)
         {
             return;
         }
 
-        int level = Mathf.Max(PlayerPrefs.GetInt("PlayingLevel", 1), 1);
-        
+        // Xóa tháp cũ khi gọi giữa các level
+        foreach (Transform child in transform)
+            Destroy(child.gameObject);
+        yPos = 0f;
+
+        level = Mathf.Max(level, 1);
+
         // Tạo bảng màu an toàn cho màn chơi này
         CreateLevelSafeMaterial(level);
 
         // Hệ số giới hạn độ khó (max ở level 100 thay vì 30)
         float t = Mathf.Clamp01((level - 1f) / 100f);
-        
+
         // Hệ số tăng vô hạn
         float t_infinite = (level - 1f) / 50f;
 
