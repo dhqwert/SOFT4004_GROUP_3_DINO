@@ -121,13 +121,29 @@ public class GameManager : MonoBehaviour
             winCoinText.rectTransform.anchoredPosition = new Vector2(0, -50);
         }
 
-        // Cộng điểm ván này vào Kho điểm Xếp Hạng Trọn Đời
-        int tempTotalScore = PlayerPrefs.GetInt("TotalLeagueScore", 0);
-        tempTotalScore += currentScore;
-        PlayerPrefs.SetInt("TotalLeagueScore", tempTotalScore);
-        PlayerPrefs.Save();
-        
-        Debug.Log("Tích luỹ thành công! Tổng điểm Xếp Hạng hiện tại: " + tempTotalScore);
+        // Gửi điểm lên Firebase (nếu đã cấu hình), fallback về PlayerPrefs
+        int earnedScore = currentScore;
+        FirebaseLeaderboardService firebase = FirebaseLeaderboardService.instance;
+        if (firebase != null && firebase.IsConfigured)
+        {
+            firebase.AddScoreToLocalPlayer(earnedScore, (ok, newTotal, seasonChanged) =>
+            {
+                if (ok)
+                    Debug.Log(seasonChanged
+                        ? "[Firebase] Mùa giải mới! Điểm reset, bắt đầu lại với " + newTotal
+                        : "[Firebase] Đã cộng " + earnedScore + " điểm. Tổng: " + newTotal);
+                else
+                    Debug.LogWarning("[Firebase] Không push được điểm.");
+            });
+        }
+        else
+        {
+            int tempTotalScore = PlayerPrefs.GetInt("TotalLeagueScore", 0);
+            tempTotalScore += earnedScore;
+            PlayerPrefs.SetInt("TotalLeagueScore", tempTotalScore);
+            PlayerPrefs.Save();
+            Debug.Log("Tổng điểm xếp hạng (local): " + tempTotalScore);
+        }
     }
 
     // ====== CHỨC NĂNG HỒI SINH ======

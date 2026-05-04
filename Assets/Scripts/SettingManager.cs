@@ -25,14 +25,25 @@ public class SettingManager : MonoBehaviour
         FindSkinManager()?.RefreshUI();
     }
 
-    // Bấm Nút này để rớt đài Xếp hạng
+    // Bấm Nút này để rớt đài Xếp hạng (reset điểm trên Firebase)
     public void ResetPoint()
     {
-        PlayerPrefs.SetInt("TotalLeagueScore", 0);
-        PlayerPrefs.Save();
-        Debug.Log(">> Đã Reset sạch Điểm Xếp Hạng (League Score)!");
-        
-        FindLeagueManager()?.RefreshLeague();
+        FirebaseLeaderboardService firebase = FirebaseLeaderboardService.instance;
+        if (firebase != null && firebase.IsConfigured)
+        {
+            firebase.SetLocalPlayerScore(0, ok =>
+            {
+                Debug.Log(ok
+                    ? ">> Đã Reset sạch Điểm Xếp Hạng trên Firebase!"
+                    : ">> Reset Firebase thất bại, kiểm tra mạng.");
+                FindLeagueManager()?.RefreshLeague();
+            });
+        }
+        else
+        {
+            Debug.LogWarning(">> Firebase chưa cấu hình, không reset được điểm.");
+            FindLeagueManager()?.RefreshLeague();
+        }
     }
 
     // Bấm Nút này để trả game về Màn 1
