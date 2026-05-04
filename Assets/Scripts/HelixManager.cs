@@ -25,12 +25,14 @@ public class HelixManager : MonoBehaviour
     float runtimeUnsafeChance;
     int runtimeTotalRings;
     int safeCountdown;
+    float baseRingDistance;
     
     // Material được tạo ra để dùng chung cho tất cả các nấc an toàn trong màn chơi này
     Material currentLevelSafeMat;
 
     private void Start()
     {
+        baseRingDistance = ringDistance;
         int level = Mathf.Max(PlayerPrefs.GetInt("CurrentLevel", 1), 1);
         GenerateForLevel(level);
     }
@@ -62,8 +64,8 @@ public class HelixManager : MonoBehaviour
         runtimeTotalRings = noOfRings + Mathf.RoundToInt(maxExtraRings * t_infinite) + (level / 5);
         runtimeTotalRings = Mathf.Max(runtimeTotalRings, 4);
 
-        // Khoảng cách các vòng hẹp dần
-        ringDistance = Mathf.Lerp(ringDistance, minRingDistance, t);
+        // Khoảng cách các vòng hẹp dần (luôn tính từ giá trị gốc)
+        ringDistance = Mathf.Lerp(baseRingDistance, minRingDistance, t);
 
         // Tỷ lệ xuất hiện bẫy gai (tăng giới hạn tối đa để game thực sự khó ở level siêu cao)
         float maxUnsafe = Mathf.Max(maxUnsafeChance, 0.85f);

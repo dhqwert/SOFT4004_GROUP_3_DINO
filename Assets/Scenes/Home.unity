@@ -4295,26 +4295,82 @@ MonoBehaviour:
   database:
   - skinMaterial: {fileID: 0}
     previewColor: {r: 1, g: 1, b: 1, a: 1}
+    skinTexture: {fileID: 0}
+    skinIcon: {fileID: 0}
+    tiling: {x: 1, y: 1}
+    offset: {x: 0, y: 0}
     price: 0
     tabCategory: 0
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0, g: 0.07450981, b: 1, a: 1}
+    skinTexture: {fileID: 0}
+    skinIcon: {fileID: 0}
+    tiling: {x: 1, y: 1}
+    offset: {x: 0, y: 0}
     price: 0
     tabCategory: 0
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0, g: 0, b: 0, a: 1}
+    skinTexture: {fileID: 0}
+    skinIcon: {fileID: 0}
+    tiling: {x: 1, y: 1}
+    offset: {x: 0, y: 0}
     price: 100
     tabCategory: 0
   - skinMaterial: {fileID: 0}
     previewColor: {r: 1, g: 0, b: 0, a: 1}
+    skinTexture: {fileID: 0}
+    skinIcon: {fileID: 0}
+    tiling: {x: 1, y: 1}
+    offset: {x: 0, y: 0}
     price: 0
     tabCategory: 1
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0.9962778, g: 0, b: 1, a: 1}
+    skinTexture: {fileID: 0}
+    skinIcon: {fileID: 0}
+    tiling: {x: 1, y: 1}
+    offset: {x: 0, y: 0}
     price: 200
     tabCategory: 1
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0, g: 1, b: 0.16457057, a: 1}
+    skinTexture: {fileID: 0}
+    skinIcon: {fileID: 0}
+    tiling: {x: 1, y: 1}
+    offset: {x: 0, y: 0}
+    price: 100
+    tabCategory: 0
+  - skinMaterial: {fileID: 0}
+    previewColor: {r: 0, g: 1, b: 0.16457057, a: 1}
+    skinTexture: {fileID: 0}
+    skinIcon: {fileID: 0}
+    tiling: {x: 1, y: 1}
+    offset: {x: 0, y: 0}
+    price: 100
+    tabCategory: 0
+  - skinMaterial: {fileID: 0}
+    previewColor: {r: 0, g: 1, b: 0.16457057, a: 1}
+    skinTexture: {fileID: 0}
+    skinIcon: {fileID: 0}
+    tiling: {x: 1, y: 1}
+    offset: {x: 0, y: 0}
+    price: 100
+    tabCategory: 0
+  - skinMaterial: {fileID: 0}
+    previewColor: {r: 0, g: 1, b: 0.16457057, a: 1}
+    skinTexture: {fileID: 0}
+    skinIcon: {fileID: 0}
+    tiling: {x: 1, y: 1}
+    offset: {x: 0, y: 0}
+    price: 100
+    tabCategory: 0
+  - skinMaterial: {fileID: 0}
+    previewColor: {r: 0, g: 1, b: 0.16457057, a: 1}
+    skinTexture: {fileID: 0}
+    skinIcon: {fileID: 0}
+    tiling: {x: 1, y: 1}
+    offset: {x: 0, y: 0}
     price: 100
     tabCategory: 0
   skinNodePrefab: {fileID: 1416013352036931320, guid: 8ca27457f84fe3d419209a359b17ec34, type: 3}
@@ -6861,7 +6917,6 @@ MonoBehaviour:
   nodePrefab: {fileID: 5998381622495344073, guid: 5f037a856af34954a95cef7dd05d0b2c, type: 3}
   container: {fileID: 343439820}
   coinText: {fileID: 985668708}
-  totalLevels: 16
 --- !u!114 &1270021979
 MonoBehaviour:
   m_ObjectHideFlags: 0
