@@ -14,13 +14,25 @@ public class SkinNode : MonoBehaviour
     private SkinManager manager; // Gọi sếp tổng SkinManager để báo cáo giao dịch
 
     // Hàm này sẽ được SkinManager gọi tự động để nhồi thông tin vào giao diện
-    public void Setup(int index, SkinManager managerRef, Color previewColor, int price, bool isUnlocked, bool isSelected)
+    public void Setup(int index, SkinManager managerRef, Color previewColor, Sprite icon, int price, bool isUnlocked, bool isSelected)
     {
         mySkinIndex = index;
         manager = managerRef;
         
-        // Tô màu cục Demo thành đúng màu của Skin
-        if (skinPreviewImage != null) skinPreviewImage.color = previewColor;
+        // Tô màu hoặc dán hình Icon cho cục Demo
+        if (skinPreviewImage != null) 
+        {
+            if (icon != null)
+            {
+                skinPreviewImage.sprite = icon;
+                skinPreviewImage.color = Color.white; // Reset màu về trắng để thấy rõ hình
+            }
+            else
+            {
+                // Nếu không có hình, chỉ đổi màu (giữ nguyên hình dạng gốc của UI)
+                skinPreviewImage.color = previewColor;
+            }
+        }
         
         if (isUnlocked)
         {

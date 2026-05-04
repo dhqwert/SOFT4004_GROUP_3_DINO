@@ -7,6 +7,10 @@ public class Ball : MonoBehaviour
     Rigidbody rb;
     public float bounceForce = 400f;
 
+    [Header("Cấu hình xoay")]
+    public float rotationSpeed = 150f;
+    private Vector3 rotationAxis;
+
     public GameObject splitPrefab;
     
     [Header("Item Effects")]
@@ -26,6 +30,8 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody> ();
         mr = GetComponent<MeshRenderer>();
         tr = GetComponent<TrailRenderer>();
+
+        rotationAxis = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
 
         if (mr != null) originalBallColor = mr.sharedMaterial.color;
         if (tr != null) originalTrailGradient = tr.colorGradient;
@@ -56,6 +62,8 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        transform.Rotate(rotationAxis * rotationSpeed * Time.deltaTime);
+
         // Khi có combo xuyên phá, bóng rơi một mạch và phá các vòng phía dưới
         if (pierceCount > 0 && !GameManager.levelWin && !GameManager.gameOver)
         {
