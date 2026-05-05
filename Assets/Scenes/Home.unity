@@ -4387,64 +4387,64 @@ MonoBehaviour:
     tabCategory: 0
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0, g: 0, b: 0, a: 1}
-    skinTexture: {fileID: 0}
-    skinIcon: {fileID: 0}
+    skinTexture: {fileID: 2800000, guid: 7506dd41a7d5d734f814dc2fd1dad6b6, type: 3}
+    skinIcon: {fileID: 21300000, guid: 7506dd41a7d5d734f814dc2fd1dad6b6, type: 3}
     tiling: {x: 1, y: 1}
     offset: {x: 0, y: 0}
     price: 100
     tabCategory: 0
   - skinMaterial: {fileID: 0}
     previewColor: {r: 1, g: 0, b: 0, a: 1}
-    skinTexture: {fileID: 0}
-    skinIcon: {fileID: 0}
+    skinTexture: {fileID: 2800000, guid: dd33e5909c8357e44ae8fcdc49ffd192, type: 3}
+    skinIcon: {fileID: 21300000, guid: dd33e5909c8357e44ae8fcdc49ffd192, type: 3}
     tiling: {x: 1, y: 1}
     offset: {x: 0, y: 0}
     price: 0
     tabCategory: 1
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0.9962778, g: 0, b: 1, a: 1}
-    skinTexture: {fileID: 0}
-    skinIcon: {fileID: 0}
+    skinTexture: {fileID: 2800000, guid: 80e9524cd3c2da84e86c6a3ec0158db7, type: 3}
+    skinIcon: {fileID: 21300000, guid: 80e9524cd3c2da84e86c6a3ec0158db7, type: 3}
     tiling: {x: 1, y: 1}
     offset: {x: 0, y: 0}
     price: 200
     tabCategory: 1
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0, g: 1, b: 0.16457057, a: 1}
-    skinTexture: {fileID: 0}
-    skinIcon: {fileID: 0}
+    skinTexture: {fileID: 2800000, guid: cfa952d5354c1c445af55991bcb965c6, type: 3}
+    skinIcon: {fileID: 21300000, guid: cfa952d5354c1c445af55991bcb965c6, type: 3}
     tiling: {x: 1, y: 1}
     offset: {x: 0, y: 0}
     price: 100
     tabCategory: 0
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0, g: 1, b: 0.16457057, a: 1}
-    skinTexture: {fileID: 0}
-    skinIcon: {fileID: 0}
+    skinTexture: {fileID: 2800000, guid: 115862dc9733c264a954198c1b8cec5f, type: 3}
+    skinIcon: {fileID: 21300000, guid: 115862dc9733c264a954198c1b8cec5f, type: 3}
     tiling: {x: 1, y: 1}
     offset: {x: 0, y: 0}
     price: 100
     tabCategory: 0
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0, g: 1, b: 0.16457057, a: 1}
-    skinTexture: {fileID: 0}
-    skinIcon: {fileID: 0}
+    skinTexture: {fileID: 2800000, guid: 92e5b3fd902c91f4d913696a6bc92e7f, type: 3}
+    skinIcon: {fileID: 21300000, guid: 92e5b3fd902c91f4d913696a6bc92e7f, type: 3}
     tiling: {x: 1, y: 1}
     offset: {x: 0, y: 0}
     price: 100
     tabCategory: 0
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0, g: 1, b: 0.16457057, a: 1}
-    skinTexture: {fileID: 0}
-    skinIcon: {fileID: 0}
+    skinTexture: {fileID: 2800000, guid: cbdc34f2622d81f448eb95af5774b850, type: 3}
+    skinIcon: {fileID: 21300000, guid: cbdc34f2622d81f448eb95af5774b850, type: 3}
     tiling: {x: 1, y: 1}
     offset: {x: 0, y: 0}
     price: 100
     tabCategory: 0
   - skinMaterial: {fileID: 0}
     previewColor: {r: 0, g: 1, b: 0.16457057, a: 1}
-    skinTexture: {fileID: 0}
-    skinIcon: {fileID: 0}
+    skinTexture: {fileID: 2800000, guid: c0a944ad8f355544098153821a9612cb, type: 3}
+    skinIcon: {fileID: 21300000, guid: c0a944ad8f355544098153821a9612cb, type: 3}
     tiling: {x: 1, y: 1}
     offset: {x: 0, y: 0}
     price: 100
