@@ -55,7 +55,7 @@ public class PlayerNameInputUI : MonoBehaviour
     {
         BuildUIIfNeeded();
         isFirstTime = true;
-        titleText.text = "ĐẶT TÊN CỦA BẠN";
+        titleText.text = "SET YOUR NAME";
         errorText.text = "";
         inputField.text = "";
         currentCallback = null;
@@ -66,7 +66,7 @@ public class PlayerNameInputUI : MonoBehaviour
     {
         BuildUIIfNeeded();
         isFirstTime = false;
-        titleText.text = "ĐỔI TÊN HIỂN THỊ";
+        titleText.text = "CHANGE DISPLAY NAME";
         errorText.text = "";
         FirebaseLeaderboardService firebase = FirebaseLeaderboardService.instance;
         inputField.text = firebase != null ? firebase.LocalPlayerName : "";
@@ -79,7 +79,7 @@ public class PlayerNameInputUI : MonoBehaviour
         string name = inputField.text != null ? inputField.text.Trim() : "";
         if (string.IsNullOrWhiteSpace(name) || name.Length < 2)
         {
-            errorText.text = "Tên phải có ít nhất 2 ký tự.";
+            errorText.text = "Name must be at least 2 characters.";
             return;
         }
         if (name.Length > 14)
@@ -112,7 +112,7 @@ public class PlayerNameInputUI : MonoBehaviour
     {
         if (isFirstTime)
         {
-            errorText.text = "Vui lòng nhập tên để tiếp tục.";
+            errorText.text = "Please enter a name to continue.";
             return;
         }
         canvas.gameObject.SetActive(false);
@@ -149,7 +149,7 @@ public class PlayerNameInputUI : MonoBehaviour
         prt.sizeDelta = new Vector2(820f, 760f);
         panel.GetComponent<Image>().color = new Color(0.08f, 0.16f, 0.42f, 1f);
 
-        TextMeshProUGUI title = CreateText(panel.transform, "Title", "ĐẶT TÊN CỦA BẠN", 60f, FontStyles.Bold, TextAlignmentOptions.Center);
+        TextMeshProUGUI title = CreateText(panel.transform, "Title", "SET YOUR NAME", 60f, FontStyles.Bold, TextAlignmentOptions.Center);
         RectTransform titleRT = (RectTransform)title.transform;
         titleRT.anchorMin = new Vector2(0f, 1f); titleRT.anchorMax = new Vector2(1f, 1f);
         titleRT.pivot = new Vector2(0.5f, 1f);
@@ -175,7 +175,7 @@ public class PlayerNameInputUI : MonoBehaviour
         taRT.anchorMin = Vector2.zero; taRT.anchorMax = Vector2.one;
         taRT.offsetMin = new Vector2(20f, 8f); taRT.offsetMax = new Vector2(-20f, -8f);
 
-        TextMeshProUGUI placeholder = CreateText(textArea.transform, "Placeholder", "Nhập tên...", 48f, FontStyles.Italic, TextAlignmentOptions.Left);
+        TextMeshProUGUI placeholder = CreateText(textArea.transform, "Placeholder", "Enter name...", 48f, FontStyles.Italic, TextAlignmentOptions.Left);
         RectTransform plRT = (RectTransform)placeholder.transform;
         plRT.anchorMin = Vector2.zero; plRT.anchorMax = Vector2.one;
         plRT.offsetMin = Vector2.zero; plRT.offsetMax = Vector2.zero;
@@ -214,7 +214,7 @@ public class PlayerNameInputUI : MonoBehaviour
         okRT.anchoredPosition = new Vector2(120f, 60f);
         ok.GetComponent<Image>().color = new Color(0.20f, 0.62f, 0.32f, 1f);
         ok.GetComponent<Button>().onClick.AddListener(OnConfirmClicked);
-        TextMeshProUGUI okLbl = CreateText(ok.transform, "Label", "XÁC NHẬN", 46f, FontStyles.Bold, TextAlignmentOptions.Center);
+        TextMeshProUGUI okLbl = CreateText(ok.transform, "Label", "CONFIRM", 46f, FontStyles.Bold, TextAlignmentOptions.Center);
         RectTransform okLblRT = (RectTransform)okLbl.transform;
         okLblRT.anchorMin = Vector2.zero; okLblRT.anchorMax = Vector2.one;
         okLblRT.offsetMin = Vector2.zero; okLblRT.offsetMax = Vector2.zero;
@@ -230,7 +230,7 @@ public class PlayerNameInputUI : MonoBehaviour
         cRT.anchoredPosition = new Vector2(-220f, 60f);
         cancel.GetComponent<Image>().color = new Color(0.55f, 0.20f, 0.20f, 1f);
         cancel.GetComponent<Button>().onClick.AddListener(OnCancelClicked);
-        TextMeshProUGUI cLbl = CreateText(cancel.transform, "Label", "HUỶ", 46f, FontStyles.Bold, TextAlignmentOptions.Center);
+        TextMeshProUGUI cLbl = CreateText(cancel.transform, "Label", "CANCEL", 46f, FontStyles.Bold, TextAlignmentOptions.Center);
         RectTransform cLblRT = (RectTransform)cLbl.transform;
         cLblRT.anchorMin = Vector2.zero; cLblRT.anchorMax = Vector2.one;
         cLblRT.offsetMin = Vector2.zero; cLblRT.offsetMax = Vector2.zero;

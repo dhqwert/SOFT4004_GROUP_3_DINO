@@ -15,7 +15,8 @@ public class LevelMapManager : MonoBehaviour
         if (coinText != null)
             coinText.text = PlayerPrefs.GetInt("TotalCoins", 0).ToString();
 
-        int unlockedLevel = Mathf.Max(1, PlayerPrefs.GetInt("CurrentLevel", 1));
+        int unlockedLevel = Mathf.Clamp(PlayerPrefs.GetInt("CurrentLevel", 1), 1, 100);
+        StartCoroutine(ScrollToTopAfterLayout());
 
         for (int i = unlockedLevel; i >= 1; i--)
         {
@@ -25,43 +26,56 @@ public class LevelMapManager : MonoBehaviour
             Image nodeImage = newNode.GetComponent<Image>();
             Button nodeButton = newNode.GetComponent<Button>();
             Transform glowEffect = newNode.transform.Find("Glow");
+            Transform lineObj = newNode.transform.Find("Line");
 
-            levelText.text = i.ToString();
+            if (levelText != null) levelText.text = i.ToString();
+            if (lineObj != null)
+            {
+                lineObj.gameObject.SetActive(i != 1);
+                Image lineImg = lineObj.GetComponent<Image>();
+                if (lineImg != null) lineImg.color = Color.cyan;
+            }
 
             if (i == unlockedLevel)
             {
-                nodeImage.color = Color.green;
+                if (nodeImage != null) nodeImage.color = new Color(0.3f, 0.85f, 0.4f);
                 if (glowEffect != null) glowEffect.gameObject.SetActive(true);
-                nodeButton.interactable = true;
             }
             else
             {
-                nodeImage.color = Color.cyan;
+                if (nodeImage != null) nodeImage.color = new Color(0.25f, 0.7f, 0.85f);
                 if (glowEffect != null) glowEffect.gameObject.SetActive(false);
-                nodeButton.interactable = true;
             }
 
-            Transform lineObj = newNode.transform.Find("Line");
-            if (lineObj != null)
+            if (nodeButton != null)
             {
-                lineObj.GetComponent<Image>().color = Color.cyan;
-                if (i == 1) lineObj.gameObject.SetActive(false);
+                int levelToLoad = i;
+                nodeButton.onClick.AddListener(() =>
+                {
+                    PlayerPrefs.SetInt("PlayingLevel", levelToLoad);
+                    PlayerPrefs.Save();
+                    SceneManager.LoadScene("GamePlay");
+                });
             }
+        }
+    }
 
-            int levelToLoad = i;
-            nodeButton.onClick.AddListener(() =>
-            {
-                PlayerPrefs.SetInt("CurrentLevel", levelToLoad);
-                PlayerPrefs.Save();
-                SceneManager.LoadScene("GamePlay");
-            });
+    System.Collections.IEnumerator ScrollToTopAfterLayout()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return null;
+        ScrollRect sr = container.GetComponentInParent<ScrollRect>();
+        if (sr != null)
+        {
+            Canvas.ForceUpdateCanvases();
+            sr.verticalNormalizedPosition = 1f; // 1 = top = level cao nhất (tạo đầu tiên)
         }
     }
 
     public void PlayCurrentLevel()
     {
-        int unlockedLevel = Mathf.Max(1, PlayerPrefs.GetInt("CurrentLevel", 1));
-        PlayerPrefs.SetInt("CurrentLevel", unlockedLevel);
+        int unlockedLevel = Mathf.Clamp(PlayerPrefs.GetInt("CurrentLevel", 1), 1, 100);
+        PlayerPrefs.SetInt("PlayingLevel", unlockedLevel);
         PlayerPrefs.Save();
         SceneManager.LoadScene("GamePlay");
     }

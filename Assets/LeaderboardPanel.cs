@@ -42,9 +42,9 @@ public class LeaderboardPanel : MonoBehaviour
     [Tooltip("Tham chiếu service. Để trống sẽ tự tìm trong scene.")]
     public FirebaseLeaderboardService firebaseServiceOverride;
     [Tooltip("Khi đang fetch Firebase: hiện thông báo loading.")]
-    public string loadingMessage = "Đang tải bảng xếp hạng...";
+    public string loadingMessage = "Loading leaderboard...";
     [Tooltip("Khi fetch Firebase lỗi: hiện thông báo này.")]
-    public string errorMessage = "Không kết nối được Firebase.";
+    public string errorMessage = "Could not connect to Firebase.";
 
     [Header("Demo player (khi chưa nối Firebase)")]
     [Tooltip("Tự sinh player demo nếu list từ LeagueManager nhỏ hơn ngưỡng.")]
@@ -1059,7 +1059,7 @@ public class LeaderboardPanel : MonoBehaviour
         img.type = Image.Type.Sliced;
         img.color = new Color(1f, 1f, 1f, 0.18f);
 
-        TextMeshProUGUI label = CreateText(btnGo.transform, "Label", "Đổi tên", 36f, FontStyles.Bold, TextAlignmentOptions.Center);
+        TextMeshProUGUI label = CreateText(btnGo.transform, "Label", "Rename", 36f, FontStyles.Bold, TextAlignmentOptions.Center);
         StretchFull((RectTransform)label.transform);
         label.color = Color.white;
 

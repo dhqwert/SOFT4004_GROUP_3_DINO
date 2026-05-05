@@ -18,13 +18,18 @@ public class GameSceneController : MonoBehaviour
 
     void Start()
     {
-        currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+        // Đọc level đang chơi, fallback về CurrentLevel nếu chưa có
+        currentLevel = PlayerPrefs.GetInt("PlayingLevel", PlayerPrefs.GetInt("CurrentLevel", 1));
     }
 
     public void OnLevelComplete()
     {
-        currentLevel++; // Tăng mãi, không giới hạn
-        PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+        int nextLevel = currentLevel + 1;
+        int maxUnlocked = PlayerPrefs.GetInt("CurrentLevel", 1);
+        if (nextLevel > maxUnlocked)
+            PlayerPrefs.SetInt("CurrentLevel", nextLevel); // Mở khóa level mới
+        PlayerPrefs.SetInt("PlayingLevel", nextLevel);
+        currentLevel = nextLevel;
         PlayerPrefs.Save();
 
         GameManager.gameOver = false;
