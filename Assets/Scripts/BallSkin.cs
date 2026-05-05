@@ -4,39 +4,51 @@ public class BallSkin : MonoBehaviour
 {
     void Start()
     {
-        // Moi con MeshRenderer của lưới bóng 3D ra
         MeshRenderer myRenderer = GetComponent<MeshRenderer>();
-        if (myRenderer != null)
+        if (myRenderer == null) return;
+
+        int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
+
+        // Ưu tiên dùng SharedDatabase (đã qua Home scene)
+        SkinData[] db = SkinManager.SharedDatabase;
+        if (db != null && selectedSkin >= 0 && selectedSkin < db.Length)
         {
-            int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
-            
-            // Nếu có dữ liệu từ Shop (chạy từ scene Home)
-            if (SkinManager.SharedDatabase != null && selectedSkin >= 0 && selectedSkin < SkinManager.SharedDatabase.Length)
-            {
-                SkinData data = SkinManager.SharedDatabase[selectedSkin];
-                
-                // Set màu
-                myRenderer.material.color = data.previewColor;
-                
-                // Set texture nếu có
-                if (data.skinTexture != null)
-                {
-                    myRenderer.material.mainTexture = data.skinTexture;
-                    myRenderer.material.mainTextureScale = data.tiling;
-                    myRenderer.material.mainTextureOffset = data.offset;
-                }
-            }
-            else
-            {
-                // Fallback nếu chạy trực tiếp từ scene chơi game (Test mode)
-                float r = PlayerPrefs.GetFloat("SkinColorR", 1f); 
-                float g = PlayerPrefs.GetFloat("SkinColorG", 1f);
-                float b = PlayerPrefs.GetFloat("SkinColorB", 1f);
-                
-                // Sơn vội lớp sơn mới đè lên cái cũ
-                myRenderer.material.color = new Color(r, g, b, 1f);
-                Debug.LogWarning("Đang chạy trực tiếp từ màn chơi, sẽ không load được Texture. Vui lòng chạy từ Scene Home để thấy Texture.");
-            }
+            ApplySkin(myRenderer, db[selectedSkin]);
+            return;
+        }
+
+        // Fallback: tìm SkinManager trong scene hiện tại
+        SkinManager mgr = Object.FindFirstObjectByType<SkinManager>();
+        if (mgr != null && mgr.database != null && selectedSkin < mgr.database.Length)
+        {
+            SkinManager.SharedDatabase = mgr.database;
+            ApplySkin(myRenderer, mgr.database[selectedSkin]);
+            return;
+        }
+
+        // Fallback cuối: chỉ apply màu từ PlayerPrefs
+        float r = PlayerPrefs.GetFloat("SkinColorR", 1f);
+        float g = PlayerPrefs.GetFloat("SkinColorG", 1f);
+        float b = PlayerPrefs.GetFloat("SkinColorB", 1f);
+        myRenderer.material.color = new Color(r, g, b, 1f);
+    }
+
+    void ApplySkin(MeshRenderer r, SkinData data)
+    {
+        Material mat = r.material;
+        if (data.skinTexture != null)
+        {
+            // Có texture → color phải trắng để texture hiện đúng màu gốc
+            mat.color = Color.white;
+            mat.mainTexture = data.skinTexture;
+            mat.mainTextureScale = data.tiling;
+            mat.mainTextureOffset = data.offset;
+        }
+        else
+        {
+            // Không có texture → dùng màu solid
+            mat.color = data.previewColor;
+            mat.mainTexture = null;
         }
     }
 }

@@ -55,11 +55,7 @@ public class SkinManager : MonoBehaviour
             int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
             if (database != null && selectedSkin >= 0 && selectedSkin < database.Length)
             {
-                globalBallMaterial.color = database[selectedSkin].previewColor;
-                globalBallMaterial.mainTexture = database[selectedSkin].skinTexture;
-                // Áp dụng Tiling và Offset
-                globalBallMaterial.mainTextureScale = database[selectedSkin].tiling;
-                globalBallMaterial.mainTextureOffset = database[selectedSkin].offset;
+                ApplyToMaterial(globalBallMaterial, database[selectedSkin]);
             }
             else
             {
@@ -147,13 +143,8 @@ public class SkinManager : MonoBehaviour
             PlayerPrefs.SetFloat("SkinColorG", database[index].previewColor.g);
             PlayerPrefs.SetFloat("SkinColorB", database[index].previewColor.b);
             
-            // Ép cái Material gốc ballMat nạp màu mới lập tức!
-            if (globalBallMaterial != null) {
-                globalBallMaterial.color = database[index].previewColor;
-                globalBallMaterial.mainTexture = database[index].skinTexture;
-                globalBallMaterial.mainTextureScale = database[index].tiling;
-                globalBallMaterial.mainTextureOffset = database[index].offset;
-            }
+            if (globalBallMaterial != null)
+                ApplyToMaterial(globalBallMaterial, database[index]);
 
             PlayerPrefs.Save();
             RefreshUI(); // Đập nát vẽ lại để cái Dấu tích xanh lục bay vào ô này
@@ -179,13 +170,8 @@ public class SkinManager : MonoBehaviour
                 PlayerPrefs.SetFloat("SkinColorG", database[index].previewColor.g);
                 PlayerPrefs.SetFloat("SkinColorB", database[index].previewColor.b);
                 
-                // Tiện tay nhuộm màu luôn cục ballMat cho lóng lánh
-                if (globalBallMaterial != null) {
-                    globalBallMaterial.color = database[index].previewColor;
-                    globalBallMaterial.mainTexture = database[index].skinTexture;
-                    globalBallMaterial.mainTextureScale = database[index].tiling;
-                    globalBallMaterial.mainTextureOffset = database[index].offset;
-                }
+                if (globalBallMaterial != null)
+                    ApplyToMaterial(globalBallMaterial, database[index]);
 
                 PlayerPrefs.Save();
                 RefreshUI();
@@ -204,5 +190,21 @@ public class SkinManager : MonoBehaviour
     {
         currentTab = tabIndex;
         RefreshUI(); // Đập toàn bộ tủ đi xếp lại theo ngăn mới
+    }
+
+    public static void ApplyToMaterial(Material mat, SkinData data)
+    {
+        if (data.skinTexture != null)
+        {
+            mat.color = Color.white; // Trắng để texture hiện đúng màu gốc
+            mat.mainTexture = data.skinTexture;
+            mat.mainTextureScale = data.tiling;
+            mat.mainTextureOffset = data.offset;
+        }
+        else
+        {
+            mat.color = data.previewColor; // Không có texture → dùng màu solid
+            mat.mainTexture = null;
+        }
     }
 }
