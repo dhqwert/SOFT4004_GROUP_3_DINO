@@ -10,12 +10,22 @@ public class LevelMapManager : MonoBehaviour
     public Transform container;
     public TextMeshProUGUI coinText;
 
+    [Header("Cấu hình số Level tối đa:")]
+    public int totalLevels = 1000;
+
+    [Header("Bật tick này để game tự mở full Level lúc mới vào (Dev Test)")]
+    public bool unlockAllLevelsByDefault = true;
+
     void Start()
     {
+        if (unlockAllLevelsByDefault)
+        {
+            PlayerPrefs.SetInt("CurrentLevel", totalLevels);
+        }
         if (coinText != null)
             coinText.text = PlayerPrefs.GetInt("TotalCoins", 0).ToString();
 
-        int unlockedLevel = Mathf.Clamp(PlayerPrefs.GetInt("CurrentLevel", 1), 1, 100);
+        int unlockedLevel = Mathf.Clamp(PlayerPrefs.GetInt("CurrentLevel", 1), 1, totalLevels);
         StartCoroutine(ScrollToTopAfterLayout());
 
         for (int i = unlockedLevel; i >= 1; i--)
@@ -74,7 +84,7 @@ public class LevelMapManager : MonoBehaviour
 
     public void PlayCurrentLevel()
     {
-        int unlockedLevel = Mathf.Clamp(PlayerPrefs.GetInt("CurrentLevel", 1), 1, 100);
+        int unlockedLevel = Mathf.Clamp(PlayerPrefs.GetInt("CurrentLevel", 1), 1, totalLevels);
         PlayerPrefs.SetInt("PlayingLevel", unlockedLevel);
         PlayerPrefs.Save();
         SceneManager.LoadScene("GamePlay");
@@ -87,12 +97,12 @@ public class LevelMapManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    [ContextMenu("MỞ KHÓA 30 LEVEL (Dev Test)")]
+    [ContextMenu("MỞ KHÓA TẤT CẢ LEVEL (Dev Test)")]
     public void UnlockAllLevels()
     {
-        PlayerPrefs.SetInt("CurrentLevel", 30);
+        PlayerPrefs.SetInt("CurrentLevel", totalLevels);
         PlayerPrefs.Save();
-        Debug.Log("DEV: Đã mở 30 level để test!");
+        Debug.Log("DEV: Đã mở khóa " + totalLevels + " level để test!");
         if (Application.isPlaying)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

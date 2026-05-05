@@ -591,7 +591,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.413696, y: 0}
+  m_AnchoredPosition: {x: 20, y: 1}
   m_SizeDelta: {x: 240, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &154806348
@@ -5637,7 +5637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18.2, y: 0}
+  m_AnchoredPosition: {x: 20, y: 3}
   m_SizeDelta: {x: 127.094, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &985668708
@@ -6055,7 +6055,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -72.5, y: -0.0000019073}
+  m_AnchoredPosition: {x: -79, y: 3}
   m_SizeDelta: {x: 45.0521, y: 45.052}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1108145672
@@ -7018,6 +7018,8 @@ MonoBehaviour:
   nodePrefab: {fileID: 5998381622495344073, guid: 5f037a856af34954a95cef7dd05d0b2c, type: 3}
   container: {fileID: 343439820}
   coinText: {fileID: 985668708}
+  totalLevels: 1000
+  unlockAllLevelsByDefault: 1
 --- !u!114 &1270021979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8429,7 +8431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 440, y: 618}
+  m_AnchoredPosition: {x: 411, y: 843}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1496844530

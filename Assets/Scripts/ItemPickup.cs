@@ -47,12 +47,20 @@ public class ItemPickup : MonoBehaviour
                         Debug.Log("🔔 [Client] Đã nhặt được 1 Coin!");
                     }
                     if (AudioManager.instance != null) AudioManager.instance.Play("Coin");
+                    
+                    // Hiệu ứng giống combo
+                    ball.SetFireState(true);
+                    FloatingText.Create("COIN!", Color.yellow);
                 }
                 else if (itemType == ItemType.Piercing)
                 {
                     ball.pierceCount += pierceAmount;
                     Debug.Log("🔥 [Client] Đã nhặt được Xuyên Phá! Xuyên qua " + pierceAmount + " tầng.");
                     if (AudioManager.instance != null) AudioManager.instance.Play("Powerup");
+                    
+                    // Hiệu ứng giống combo
+                    ball.SetFireState(true);
+                    FloatingText.Create("POWERUP!", Color.red);
                 }
                 
                 Destroy(gameObject);

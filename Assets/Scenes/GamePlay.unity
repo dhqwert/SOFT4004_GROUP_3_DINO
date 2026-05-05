@@ -640,13 +640,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Coin
-    clip: {fileID: 8300000, guid: 5f05eb9c3ddf5a940b51517ed38eeef8, type: 3}
+    clip: {fileID: 8300000, guid: 387db908a48bfe049a4a67a1e744360f, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Powerup
-    clip: {fileID: 8300000, guid: 8c256ded3117f5046bd5739af3bba47a, type: 3}
+    clip: {fileID: 8300000, guid: 24324305a1736684986c4fdec5a42f41, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bounce
+    clip: {fileID: 8300000, guid: 2d762f3cd475cf04c879dcf9dd41e25e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Whoosh
+    clip: {fileID: 8300000, guid: b51a08d32f31f3443b7e56e119fc0af6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: d1fafca1a103c474580695f3def4421b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GameWin
+    clip: {fileID: 8300000, guid: 95383648f536b794e90273db9f457e0b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Land
+    clip: {fileID: 8300000, guid: e5ae3cd363230624394c2ae3b4049fda, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bounce
+    clip: {fileID: 8300000, guid: 24324305a1736684986c4fdec5a42f41, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -1258,7 +1294,7 @@ MonoBehaviour:
   coinPrefab: {fileID: 3518151066335375924, guid: 7533be23f63b38f4fa2fbb9cca354068, type: 3}
   piercePrefab: {fileID: 7005789619248919145, guid: e1060aef601daf24aad7234534bef26f, type: 3}
   itemSpawnChance: 0.6
-  pierceSpawnChance: 0.25
+  pierceSpawnChance: 0.24
 --- !u!4 &676379168
 Transform:
   m_ObjectHideFlags: 0
@@ -1772,7 +1808,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u25C0 BACK"
+  m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 1485648320}
@@ -1799,13 +1835,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2451,6 +2487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 400
+  rotationSpeed: 150
   splitPrefab: {fileID: 6168038806166532295, guid: 224205b48baa8c84a8a766b1eee10cda, type: 3}
   pierceCount: 0
   passCount: 0
@@ -2905,7 +2942,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b676b95b19b6b724ab2e9f2b52c500ff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 536ccb03e8c93ac489f0b0f256e18f52, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
